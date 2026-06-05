@@ -13,6 +13,22 @@
         html { scroll-behavior: smooth; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .font-serif { font-family: 'Playfair Display', serif; }
+        
+        /* Smooth native snapping for the swiping gallery */
+        .snap-x {
+            scroll-snap-type: x mandatory;
+        }
+        .snap-center {
+            scroll-snap-align: center;
+        }
+        /* Hide default scrollbars for a cleaner appearance */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
 </head>
 <body class="bg-[#FBF9F6] text-[#1C1B1A] antialiased selection:bg-[#A3704C]/10 selection:text-[#A3704C]">
@@ -28,6 +44,7 @@
             </a>
             <div class="hidden md:flex space-x-10 text-[11px] tracking-[0.2em] uppercase font-medium text-[#5C5A57]">
                 <a href="#about" class="hover:text-[#A3704C] transition-colors">The Studio</a>
+                <a href="#studio-tour" class="hover:text-[#A3704C] transition-colors">Studio Tour</a>
                 <a href="#workshops" class="hover:text-[#A3704C] transition-colors">Workshops</a>
                 <a href="#kids" class="hover:text-[#A3704C] transition-colors">Kids' Corner</a>
                 <a href="#custom-sessions" class="hover:text-[#A3704C] transition-colors">Group Events</a>
@@ -59,10 +76,7 @@
             
             <div class="md:col-span-5">
                 <div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden shadow-sm border border-[#EBE7E0] relative group">
-                    <!-- Live Hero Photo Asset -->
-                    <img src="hero-pottery.png" alt="Wet clay spinning on a potter wheel" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
-                    
-                    <!-- Elegant Text Overlay -->
+                    <img src="hero-pottery.jpg" alt="Wet clay spinning on a potter wheel" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#1C1B1A]/40 via-transparent to-transparent flex flex-col justify-end p-8 text-white transition-opacity duration-300 group-hover:opacity-90">
                         <div class="w-12 h-[1px] bg-white/60 mb-3"></div>
                         <p class="font-serif italic text-lg tracking-wide mb-1">“Earth & Hands”</p>
@@ -73,25 +87,16 @@
         </div>
     </section>
 
-    <!-- Studio & Founder Philosophy (UPDATED: Premium Two-Column Layout with Portrait Photo) -->
+    <!-- Studio & Founder Philosophy -->
     <section id="about" class="border-t border-b border-[#EBE7E0] bg-[#FAF7F2]">
         <div class="max-w-6xl mx-auto px-6 py-24">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
                 
-                <!-- Left Column: Priya's Portrait Image Holder -->
+                <!-- Left Column: Priya's Portrait Image -->
                 <div class="md:col-span-5 order-2 md:order-1">
                     <div class="aspect-[3/4] max-w-sm mx-auto bg-white rounded-2xl overflow-hidden shadow-sm border border-[#EBE7E0] relative group">
-                        <!-- Live Portrait Photo Asset -->
                         <img src="Priya_MittiFounder.jpg" alt="Priya — Founder of Mitti Studio" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
-                        
-                        <!-- Overlay Frame Details -->
                         <div class="absolute inset-0 border border-inset border-white/20 rounded-2xl pointer-events-none"></div>
-                        
-                        <!-- Temporary Placeholder Text: This hides automatically behind the photo once loaded, but acts as a backup design fallback -->
-                        <div class="absolute inset-0 flex flex-col justify-center items-center bg-[#FAF7F2] text-center p-6 group-hover:bg-transparent transition-colors duration-500 z-[-1]">
-                            <p class="font-serif italic text-base text-[#1C1B1A] mb-1">Priya</p>
-                            <p class="text-[9px] uppercase tracking-[0.2em] text-[#8A8681] font-light">[ Portrait Image ]</p>
-                        </div>
                     </div>
                 </div>
 
@@ -111,8 +116,85 @@
         </div>
     </section>
 
+    <!-- Studio Tour Gallery Section (Expanded to 6 Images) -->
+    <section id="studio-tour" class="max-w-6xl mx-auto px-6 py-24 md:py-32">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-end mb-12">
+            <div class="md:col-span-7 space-y-3">
+                <p class="text-[11px] tracking-[0.25em] uppercase font-semibold text-[#A3704C]">The Sanctuary</p>
+                <h2 class="text-3xl font-serif font-light text-[#1C1B1A] tracking-tight">Mitti — The Pottery Studio</h2>
+                <p class="text-sm text-[#5C5A57] font-light max-w-xl leading-relaxed">
+                    A thoughtfully curated space designed for creative immersion. Swipe through our studio corners to view our premium potter's wheels, tool arrays, and quiet drying spaces.
+                </p>
+            </div>
+            <div class="md:col-span-5 text-left md:text-right">
+                <a href="https://maps.app.goo.gl/CSHZicRRCuukH1Nw6" target="_blank" class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-[#A3704C] hover:text-[#1C1B1A] transition-colors border-b border-[#A3704C]/30 pb-1 hover:border-[#1C1B1A]">
+                    📍 View Studio Map & Directions →
+                </a>
+            </div>
+        </div>
+
+        <!-- Expanded Horizontal Swipe Container -->
+        <div class="relative">
+            <div class="flex overflow-x-auto gap-6 snap-x no-scrollbar pb-4 scroll-smooth">
+                
+                <!-- Image 1 (Landscape) -->
+                <div class="flex-none w-[85%] md:w-[55%] snap-center">
+                    <div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group">
+                        <img src="MittiStudio1.jpeg" alt="Mitti Pottery Studio View 1" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103">
+                    </div>
+                </div>
+
+                <!-- Image 2 (Landscape) -->
+                <div class="flex-none w-[85%] md:w-[55%] snap-center">
+                    <div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group">
+                        <img src="MittiStudio2.jpeg" alt="Mitti Pottery Studio View 2" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103">
+                    </div>
+                </div>
+
+                <!-- Image 3 (Landscape) -->
+                <div class="flex-none w-[85%] md:w-[55%] snap-center">
+                    <div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group">
+                        <img src="MittiStudio3.jpeg" alt="Mitti Pottery Studio View 3" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103">
+                    </div>
+                </div>
+
+                <!-- Image 4 (Portrait mode scaled symmetrically in slider frame) -->
+                <div class="flex-none w-[65%] md:w-[40%] snap-center">
+                    <div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group">
+                        <img src="MittiStudio4.jpeg" alt="Mitti Pottery Studio View 4" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103">
+                    </div>
+                </div>
+
+                <!-- Image 5 (Landscape) -->
+                <div class="flex-none w-[85%] md:w-[55%] snap-center">
+                    <div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group">
+                        <img src="MittiStudio5.jpeg" alt="Mitti Pottery Studio View 5" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103">
+                    </div>
+                </div>
+
+                <!-- Image 6 (Landscape) -->
+                <div class="flex-none w-[85%] md:w-[55%] snap-center">
+                    <div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group">
+                        <img src="MittiStudio6.jpeg" alt="Mitti Pottery Studio View 6" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103">
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- Mobile visual pagination line cues -->
+            <div class="flex justify-center md:justify-start gap-1.5 mt-5 opacity-40">
+                <span class="w-8 h-[2px] bg-[#A3704C]"></span>
+                <span class="w-2 h-[2px] bg-[#5C5A57]"></span>
+                <span class="w-2 h-[2px] bg-[#5C5A57]"></span>
+                <span class="w-2 h-[2px] bg-[#5C5A57]"></span>
+                <span class="w-2 h-[2px] bg-[#5C5A57]"></span>
+                <span class="w-2 h-[2px] bg-[#5C5A57]"></span>
+            </div>
+        </div>
+    </section>
+
     <!-- Workshops Section -->
-    <section id="workshops" class="max-w-6xl mx-auto px-6 py-24 md:py-32 space-y-16">
+    <section id="workshops" class="max-w-6xl mx-auto px-6 py-24 md:py-32 space-y-16 border-t border-[#EBE7E0]">
         <div class="flex flex-col md:flex-row justify-between items-baseline gap-4 border-b border-[#EBE7E0] pb-6">
             <div>
                 <p class="text-[11px] tracking-[0.25em] uppercase font-semibold text-[#A3704C] mb-2">Curated Journeys</p>
@@ -122,7 +204,6 @@
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-            <!-- Experience 1 -->
             <div class="space-y-4">
                 <div class="flex justify-between items-baseline border-b border-[#EBE7E0] pb-2">
                     <h3 class="text-xl font-serif font-light text-[#1C1B1A]">One-Time Pottery Experience</h3>
@@ -133,7 +214,6 @@
                 </p>
             </div>
 
-            <!-- Experience 2 -->
             <div class="space-y-4">
                 <div class="flex justify-between items-baseline border-b border-[#EBE7E0] pb-2">
                     <h3 class="text-xl font-serif font-light text-[#1C1B1A]">Outdoor & Farm Pottery</h3>
@@ -144,7 +224,6 @@
                 </p>
             </div>
 
-            <!-- Experience 3 -->
             <div class="space-y-4">
                 <div class="flex justify-between items-baseline border-b border-[#EBE7E0] pb-2">
                     <h3 class="text-xl font-serif font-light text-[#1C1B1A]">Clay Dates for Couples</h3>
@@ -155,7 +234,6 @@
                 </p>
             </div>
 
-            <!-- Experience 4 -->
             <div class="space-y-4">
                 <div class="flex justify-between items-baseline border-b border-[#EBE7E0] pb-2">
                     <h3 class="text-xl font-serif font-light text-[#1C1B1A]">Summer & Holiday Workshops</h3>
@@ -195,7 +273,6 @@
                 </div>
             </div>
 
-            <!-- Fine Arts Tags -->
             <div class="mt-12 flex flex-wrap justify-center gap-2 max-w-2xl mx-auto">
                 <span class="bg-white border border-[#EBE7E0] px-4 py-1.5 rounded-full text-[10px] font-semibold text-[#5C5A57] uppercase tracking-wider">🏺 Clay Art</span>
                 <span class="bg-white border border-[#EBE7E0] px-4 py-1.5 rounded-full text-[10px] font-semibold text-[#5C5A57] uppercase tracking-wider">🪡 Embroidery Loops</span>
@@ -243,17 +320,25 @@
                 <h3 class="text-2xl font-serif font-light text-[#1C1B1A]">Studio Guidelines & FAQ</h3>
             </div>
             <div class="space-y-4 text-sm text-[#5C5A57] font-light">
-                <div class="bg-white p-5 rounded-lg border border-[#EBE7E0] space-y-2">
-                    <h4 class="font-medium text-[#1C1B1A]">👉 When can I collect my pottery piece?</h4>
-                    <p class="text-xs leading-relaxed">Because handcrafted clay requires careful air-drying followed by distinct bisque and glaze kiln firings, your finished earthenware will be ready for collection approximately 3 to 4 weeks after your session. If you would like to return to paint your creations with an underglaze after their first firing but before the final glazing, we would love to host you for that extra step.</p>
+                <div class="bg-white p-6 rounded-xl border border-[#EBE7E0] space-y-2 shadow-sm">
+                    <h4 class="font-medium text-[#1C1B1A]">When can I collect my finished pottery?</h4>
+                    <p class="text-xs md:text-sm leading-relaxed text-[#5C5A57]">
+                        Handcrafted clay goes through a patient journey—requiring thorough air-drying followed by precise bisque and glaze kiln firings. Your finished earthenware will be ready for collection approximately 3 to 4 weeks after your session. <br><br>
+                        <span class="text-[#A3704C] font-medium">🎨 Want to add color?</span> If you would like to personally paint your piece, we offer an intermediate session to apply underglazes right after the initial bisque firing, just before we apply the final protective glaze.
+                    </p>
                 </div>
                 <div class="bg-white p-5 rounded-lg border border-[#EBE7E0] space-y-2">
-                    <h4 class="font-medium text-[#1C1B1A]">👉 What should I wear to a clay workshop?</h4>
-                    <p class="text-xs leading-relaxed">While clay washes out completely, we highly recommend arriving in comfortable, casual clothing and flat, closed-toe shoes. We will provide you with studio aprons to protect your clothes while creating. For your comfort and safety on the wheel, please keep long hair tied back—and trimming your nails short is incredibly helpful!</p>
+                    <h4 class="font-medium text-[#1C1B1A]">What should I wear to a workshop?</h4>
+                    <p class="text-xs md:text-sm leading-relaxed text-[#5C5A57]">
+                        Don't worry about the mess—clay is completely water-soluble and washes out easily! We highly recommend wearing comfortable, casual clothes that you don't mind getting a little dusty. We will provide you with a studio apron to protect your attire while you create.<br><br>
+                        <span class="text-[#A3704C] font-medium">👋 Pro-tip for the wheel:</span> For the best experience and grip on the clay, please keep long hair tied back, and we highly recommend trimming your nails short!
+                    </p>
                 </div>
                 <div class="bg-white p-5 rounded-lg border border-[#EBE7E0] space-y-2">
-                    <h4 class="font-medium text-[#1C1B1A]">👉 What is your cancellation and booking policy?</h4>
-                    <p class="text-xs leading-relaxed">As wheel allocations are limited and personal to each time slot, sessions can be rescheduled up to 24 hours in advance. No-shows or late cancellations are non-refundable.</p>
+                    <h4 class="font-medium text-[#1C1B1A]">What is your booking and cancellation policy?</h4>
+                    <p class="text-xs md:text-sm leading-relaxed text-[#5C5A57]">
+                        To preserve the intimate environment of our studio, wheel allocations are strictly limited and reserved exclusively for your scheduled time slot. Because of this personal setup, sessions can be rescheduled up to 24 hours in advance. Late cancellations or no-shows are non-refundable.
+                    </p>
                 </div>
             </div>
         </div>
