@@ -1,1 +1,292 @@
-<h1>Mitti - The Pottery Studio - Coming Soon!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitti — Pottery & Art Experiences</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+    </style>
+</head>
+<body class="bg-[#FBF9F6] text-[#1C1B1A] antialiased selection:bg-[#A3704C]/10 selection:text-[#A3704C]">
+
+    <!-- Top Accent Line -->
+    <div class="h-1.5 bg-[#A3704C]"></div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 bg-[#FBF9F6]/80 backdrop-blur-md border-b border-[#EBE7E0] z-40">
+        <div class="max-w-6xl mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="transition-opacity hover:opacity-80">
+                <img src="Mitti Logo 2028.PNG" alt="Mitti Logo" class="h-14 md:h-16 w-auto object-contain">
+            </a>
+            <div class="hidden md:flex space-x-10 text-[11px] tracking-[0.2em] uppercase font-medium text-[#5C5A57]">
+                <a href="#about" class="hover:text-[#A3704C] transition-colors">The Studio</a>
+                <a href="#workshops" class="hover:text-[#A3704C] transition-colors">Workshops</a>
+                <a href="#kids" class="hover:text-[#A3704C] transition-colors">Kids' Corner</a>
+                <!-- Updated label here -->
+                <a href="#custom-sessions" class="hover:text-[#A3704C] transition-colors">Group Events</a>
+                <a href="#faq" class="hover:text-[#A3704C] transition-colors">FAQ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Frame -->
+    <section class="max-w-6xl mx-auto px-6 pt-16 pb-24 md:pt-28 md:pb-36">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+            <div class="md:col-span-7 space-y-6">
+                <p class="text-[11px] tracking-[0.25em] uppercase font-semibold text-[#A3704C]">A Calm Collective Space</p>
+                <h1 class="text-4xl md:text-6xl font-serif font-light text-[#1C1B1A] leading-[1.15] tracking-tight">
+                    Shaping clay, <br><span class="italic font-normal text-[#A3704C]">cultivating presence.</span>
+                </h1>
+                <p class="text-sm md:text-base text-[#5C5A57] max-w-lg leading-relaxed font-light">
+                    Mitti is a dedicated sanctuary for pottery and tactile art experiences across generations. We invite you to slow down, work intentionally with your hands, and discover the grounding poetry of raw craft.
+                </p>
+                <div class="pt-4 flex flex-wrap gap-6 items-center">
+                    <a href="#workshops" class="text-xs tracking-[0.15em] uppercase font-medium border-b border-[#1C1B1A] pb-1 hover:text-[#A3704C] hover:border-[#A3704C] transition-all">
+                        Explore Experiences ↓
+                    </a>
+                    <a href="https://maps.app.goo.gl/CSHZicRRCuukH1Nw6" target="_blank" class="text-xs tracking-[0.15em] uppercase font-medium text-[#5C5A57] hover:text-[#1C1B1A] transition-colors flex items-center gap-1.5">
+                        📍 Locate Our Space
+                    </a>
+                </div>
+            </div>
+            
+            <div class="md:col-span-5">
+                <div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden shadow-inner border border-[#EBE7E0] flex flex-col justify-center items-center p-8 text-center group">
+                    <div class="w-12 h-[1px] bg-[#A3704C] mb-4"></div>
+                    <p class="font-serif italic text-lg text-[#1C1B1A] mb-2">“Earth & Hands”</p>
+                    <p class="text-[11px] uppercase tracking-[0.15em] text-[#8A8681] font-light max-w-[200px]">
+                        [ Place a striking photo of wet clay spinning on the wheel here ]
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Studio & Founder Philosophy -->
+    <section id="about" class="border-t border-b border-[#EBE7E0] bg-[#FAF7F2]">
+        <div class="max-w-4xl mx-auto px-6 py-24 text-center space-y-6">
+            <p class="text-[10px] tracking-[0.2em] uppercase font-medium text-[#8A8681]">Studio Leadership</p>
+            <h2 class="text-2xl md:text-3xl font-serif font-light tracking-tight text-[#1C1B1A]">Guided by Priya</h2>
+            <div class="w-12 h-[1px] bg-[#A3704C] mx-auto"></div>
+            <p class="text-sm md:text-base text-[#5C5A57] leading-relaxed max-w-2xl mx-auto font-light">
+                Every throw, trim, and fire at Mitti is structured and personally led by <strong>Priya</strong>, an experienced professional artisan potter. Dedicated to stripping away the intimidation of clay, Priya guides minds of all milestones—from young toddlers discovering form to adults mastering utility on the wheel.
+            </p>
+        </div>
+    </section>
+
+    <!-- Workshops Section -->
+    <section id="workshops" class="max-w-6xl mx-auto px-6 py-24 md:py-32 space-y-16">
+        <div class="flex flex-col md:flex-row justify-between items-baseline gap-4 border-b border-[#EBE7E0] pb-6">
+            <div>
+                <p class="text-[11px] tracking-[0.25em] uppercase font-semibold text-[#A3704C] mb-2">Curated Journeys</p>
+                <h2 class="text-3xl font-serif font-light text-[#1C1B1A]">The Studio Experiences</h2>
+            </div>
+            <p class="text-xs text-[#8A8681] uppercase tracking-widest font-light">Intimate batches • Guided personally by Priya</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+            <!-- Experience 1 -->
+            <div class="space-y-4">
+                <div class="flex justify-between items-baseline border-b border-[#EBE7E0] pb-2">
+                    <h3 class="text-xl font-serif font-light text-[#1C1B1A]">One-Time Pottery Experience</h3>
+                    <span class="text-xs text-[#A3704C] font-medium tracking-wider uppercase">Ages 3 +</span>
+                </div>
+                <p class="text-sm text-[#5C5A57] font-light leading-relaxed">
+                    A welcoming, single-session introduction to clay. Feel the soothing texture of spinning earth and mold your very first ceramic vessel to take home.
+                </p>
+            </div>
+
+            <!-- Experience 2 -->
+            <div class="space-y-4">
+                <div class="flex justify-between items-baseline border-b border-[#EBE7E0] pb-2">
+                    <h3 class="text-xl font-serif font-light text-[#1C1B1A]">Outdoor & Farm Pottery</h3>
+                    <span class="text-xs text-[#8A8681] font-light tracking-widest uppercase">Open Air Sessions</span>
+                </div>
+                <p class="text-sm text-[#5C5A57] font-light leading-relaxed">
+                    Connecting craft back to nature. We carry our wheels and premium raw materials out into open lawns, quiet orchards, and rustic farm retreats for fully immersive open-air pottery sessions.
+                </p>
+            </div>
+
+            <!-- Experience 3 -->
+            <div class="space-y-4">
+                <div class="flex justify-between items-baseline border-b border-[#EBE7E0] pb-2">
+                    <h3 class="text-xl font-serif font-light text-[#1C1B1A]">Clay Dates for Couples</h3>
+                    <span class="text-xs text-[#8A8681] font-light tracking-widest uppercase">Private Booking</span>
+                </div>
+                <p class="text-sm text-[#5C5A57] font-light leading-relaxed">
+                    An artistic, completely screen-free escape. Share a creative evening, co-create custom keepsake mugs, and converse in the peaceful rhythm of our studio.
+                </p>
+            </div>
+
+            <!-- Experience 4 -->
+            <div class="space-y-4">
+                <div class="flex justify-between items-baseline border-b border-[#EBE7E0] pb-2">
+                    <h3 class="text-xl font-serif font-light text-[#1C1B1A]">Summer & Holiday Workshops</h3>
+                    <span class="text-xs text-[#8A8681] font-light tracking-widest uppercase">Seasonal</span>
+                </div>
+                <p class="text-sm text-[#5C5A57] font-light leading-relaxed">
+                    Immersive multi-day intensives planned during school and holiday breaks. Engineered to enrich spatial awareness, patience, and fine coordination.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kids Creative Studio -->
+    <section id="kids" class="bg-[#FAF7F2] border-t border-b border-[#EBE7E0] py-24">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-xl mx-auto space-y-4 mb-16">
+                <p class="text-[11px] tracking-[0.25em] uppercase font-semibold text-[#A3704C]">Tactile Growth</p>
+                <h2 class="text-3xl font-serif font-light text-[#1C1B1A]">Kids’ Art Corner & Playdates</h2>
+                <p class="text-xs text-[#5C5A57] font-light leading-relaxed">Nurturing micro-motor skills, texture confidence, and immersive creative play through structured fine arts exploration.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl border border-[#EBE7E0] space-y-3 shadow-sm">
+                    <span class="text-xs uppercase font-semibold tracking-wider text-[#A3704C]">01 / Curated Play</span>
+                    <h4 class="font-serif text-lg text-[#1C1B1A]">Kids' Playdates</h4>
+                    <p class="text-xs text-[#5C5A57] leading-relaxed font-light">Delightful, social crafting sessions tailored specifically for children's get-togethers and interactive birthdays.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl border border-[#EBE7E0] space-y-3 shadow-sm">
+                    <span class="text-xs uppercase font-semibold tracking-wider text-[#A3704C]">02 / Fine Focus</span>
+                    <h4 class="font-serif text-lg text-[#1C1B1A]">Hands-On Events</h4>
+                    <p class="text-xs text-[#5C5A57] leading-relaxed font-light">Interactive children's milestones centered around real craft techniques, keeping little hands productively molding and creating.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl border border-[#EBE7E0] space-y-3 shadow-sm">
+                    <span class="text-xs uppercase font-semibold tracking-wider text-[#A3704C]">03 / Mixed Mediums</span>
+                    <h4 class="font-serif text-lg text-[#1C1B1A]">Beyond the Clay</h4>
+                    <p class="text-xs text-[#5C5A57] leading-relaxed font-light">Diving into distinct textures and fine art traditions, spanning fluid color washes to intricate threaded frame assemblies.</p>
+                </div>
+            </div>
+
+            <!-- Fine Arts Tags -->
+            <div class="mt-12 flex flex-wrap justify-center gap-2 max-w-2xl mx-auto">
+                <span class="bg-white border border-[#EBE7E0] px-4 py-1.5 rounded-full text-[10px] font-semibold text-[#5C5A57] uppercase tracking-wider">🏺 Clay Art</span>
+                <span class="bg-white border border-[#EBE7E0] px-4 py-1.5 rounded-full text-[10px] font-semibold text-[#5C5A57] uppercase tracking-wider">🪡 Embroidery Loops</span>
+                <span class="bg-white border border-[#EBE7E0] px-4 py-1.5 rounded-full text-[10px] font-semibold text-[#5C5A57] uppercase tracking-wider">🎨 Watercolor Exploration</span>
+                <span class="bg-white border border-[#EBE7E0] px-4 py-1.5 rounded-full text-[10px] font-semibold text-[#5C5A57] uppercase tracking-wider">🍦 Popsicle Art</span>
+                <span class="bg-white border border-[#EBE7E0] px-4 py-1.5 rounded-full text-[10px] font-semibold text-[#5C5A57] uppercase tracking-wider">🔑 Custom Keychains</span>
+                <span class="bg-white border border-[#EBE7E0] px-4 py-1.5 rounded-full text-[10px] font-semibold text-[#5C5A57] uppercase tracking-wider">🖼️ Photo Frame Making</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Sessions & Group Bookings Section -->
+    <section id="custom-sessions" class="max-w-6xl mx-auto px-6 py-24 md:py-32">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-baseline">
+            <div class="md:col-span-4">
+                <p class="text-[11px] tracking-[0.25em] uppercase font-semibold text-[#A3704C] mb-2">Tailored Gatherings</p>
+                <!-- Updated Heading word choice -->
+                <h3 class="text-3xl font-serif font-light text-[#1C1B1A] tracking-tight">Custom Events & Private Group Sessions.</h3>
+            </div>
+            <div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-8 text-sm">
+                <div class="border-l border-[#A3704C] pl-6 space-y-2">
+                    <h4 class="font-medium text-[#1C1B1A]">Family Gatherings</h4>
+                    <p class="text-xs text-[#5C5A57] font-light leading-relaxed">Host beautiful family reunions or intimate group activities at our studio, bonding over tactile clay assignments.</p>
+                </div>
+                <div class="border-l border-[#A3704C] pl-6 space-y-2">
+                    <h4 class="font-medium text-[#1C1B1A]">At-Home Mobile Pottery</h4>
+                    <p class="text-xs text-[#5C5A57] font-light leading-relaxed">We bring portable professional throwing units directly into your backyard, private home lawn, or living space for highly exclusive private group sessions.</p>
+                </div>
+                <div class="border-l border-[#A3704C] pl-6 space-y-2">
+                    <h4 class="font-medium text-[#1C1B1A]">Pre-Wedding Shoots</h4>
+                    <p class="text-xs text-[#5C5A57] font-light leading-relaxed">A distinct, artistic, cinematic aesthetic setup combining clean natural lighting with rustic pottery wheels for romantic lifestyle portraits.</p>
+                </div>
+                <div class="border-l border-[#A3704C] pl-6 space-y-2">
+                    <h4 class="font-medium text-[#1C1B1A]">Educational Institutions & Programs</h4>
+                    <p class="text-xs text-[#5C5A57] font-light leading-relaxed">Tailored structural design and tactile literacy modules engineered cleanly for premium schools, academies, and colleges.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Studio Policies Accordion Section -->
+    <section id="faq" class="bg-[#FAF7F2] border-t border-b border-[#EBE7E0] py-24">
+        <div class="max-w-3xl mx-auto px-6 space-y-8">
+            <div class="text-center space-y-2">
+                <p class="text-[11px] tracking-[0.25em] uppercase font-semibold text-[#A3704C]">Good to Know</p>
+                <h3 class="text-2xl font-serif font-light text-[#1C1B1A]">Studio Guidelines & FAQ</h3>
+            </div>
+            <div class="space-y-4 text-sm text-[#5C5A57] font-light">
+                <div class="bg-white p-5 rounded-lg border border-[#EBE7E0] space-y-2">
+                    <h4 class="font-medium text-[#1C1B1A]">👉 When can I collect my pottery piece?</h4>
+                    <p class="text-xs leading-relaxed">Because handcrafted clay requires careful air-drying followed by distinct bisque and glaze kiln firings, your finished earthenware will be ready for collection approximately 3 to 4 weeks after your session. If you would like to return to paint your creations with an underglaze after their first firing but before the final glazing, we would love to host you for that extra step.</p>
+                </div>
+                <div class="bg-white p-5 rounded-lg border border-[#EBE7E0] space-y-2">
+                    <h4 class="font-medium text-[#1C1B1A]">👉 What should I wear to a clay workshop?</h4>
+                    <p class="text-xs leading-relaxed">Don't worry about the mess—clay washes out entirely, and we provide aprons to keep your clothes protected! For a seamless session, just wear comfortable clothes and flat, closed-toe shoes. Pro tip for the potter's wheel: tie back long hair and trim your nails short for a much better grip on the clay!</p>
+                </div>
+                <div class="bg-white p-5 rounded-lg border border-[#EBE7E0] space-y-2">
+                    <h4 class="font-medium text-[#1C1B1A]">👉 What is your cancellation and booking policy?</h4>
+                    <p class="text-xs leading-relaxed">As wheel allocations are limited and personal to each time slot, sessions can be rescheduled up to 24 hours in advance. No-shows or late cancellations are non-refundable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Refined Footer -->
+    <footer id="contact" class="bg-[#1C1B1A] text-[#A6A39F] pt-20 pb-28 border-t-4 border-[#A3704C]">
+        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+            
+            <div class="md:col-span-5 space-y-6">
+                <h2 class="text-2xl font-serif text-white font-light tracking-wide">Mitti Studio</h2>
+                <p class="text-xs text-[#8A8681] leading-relaxed max-w-sm font-light">
+                    A premium collective studio platform dedicated to clay instruction, structural design, and mixed art media workshops.
+                </p>
+                <div class="pt-2">
+                    <a href="https://forms.gle/8tmBSaus2SWtknm78" target="_blank" class="inline-block bg-[#A3704C] text-white text-xs font-medium uppercase tracking-[0.15em] px-8 py-3.5 rounded-md hover:bg-[#8F5F3D] transition-colors shadow-sm">
+                        Submit Studio Enquiry Form
+                    </a>
+                </div>
+            </div>
+
+            <div class="md:col-span-4 space-y-3 text-xs font-light">
+                <h4 class="text-white font-medium uppercase tracking-widest text-[10px] mb-4">Connect Directly</h4>
+                <p class="flex items-center gap-2">✉️ <a href="mailto:mitti.pottery.studio@gmail.com" class="hover:text-white transition-colors">mitti.pottery.studio@gmail.com</a></p>
+                <p class="flex items-center gap-2">📸 <a href="https://www.instagram.com/brush_and_mud/" target="_blank" class="hover:text-white transition-colors">@brush_and_mud</a></p>
+                <p class="flex items-center gap-2 pt-2 text-[#8A8681]">📍 Bangalore, India</p>
+            </div>
+
+            <div class="md:col-span-3 space-y-2 text-xs font-light">
+                <h4 class="text-white font-medium uppercase tracking-widest text-[10px] mb-4">Studio Coordinates</h4>
+                <p class="text-xs leading-relaxed max-w-[200px]">
+                    Pre-booking is strictly mandatory to ensure single-wheel allocation.
+                </p>
+                <p class="pt-3">
+                    <a href="https://maps.app.goo.gl/CSHZicRRCuukH1Nw6" target="_blank" class="text-[#A3704C] underline underline-offset-4 hover:text-white transition-colors">
+                        Navigate on Google Maps →
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-6 pt-16 mt-16 border-t border-white/5 flex flex-col sm:flex-row justify-between text-[11px] text-gray-600 font-light">
+            <p>© 2026 Mitti Pottery Studio. Built intentionally.</p>
+            <p class="mt-2 sm:mt-0">All studio workshops conducted by Priya.</p>
+        </div>
+    </footer>
+
+    <!-- STICKY FLOATING ACTION FOOTER BAR -->
+    <div class="fixed bottom-0 left-0 right-0 bg-[#FBF9F6]/90 backdrop-blur-md border-t border-[#EBE7E0] z-50 py-3 px-6 shadow-lg md:py-4">
+        <div class="max-w-xl mx-auto flex gap-4 items-center justify-between">
+            <p class="hidden sm:block text-[11px] font-medium uppercase tracking-widest text-[#5C5A57]">Ready to mold?</p>
+            <div class="flex gap-3 w-full sm:w-auto">
+                <a href="https://wa.me/918277292337" target="_blank" class="flex-1 sm:flex-none bg-[#25D366] text-white font-medium px-5 py-2.5 rounded-md hover:bg-[#20ba56] transition-colors text-xs flex items-center justify-center gap-2 shadow-sm">
+                    💬 WhatsApp Chat
+                </a>
+                <a href="https://forms.gle/8tmBSaus2SWtknm78" target="_blank" class="flex-1 sm:flex-none bg-[#1C1B1A] text-white font-medium px-5 py-2.5 rounded-md hover:bg-[#A3704C] transition-colors text-xs text-center shadow-sm">
+                    📋 Enquiry Form
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
