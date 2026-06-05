@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mitti — Pottery & Art Experiences</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,12 +33,15 @@
 </head>
 <body class="bg-[#FBF9F6] text-[#1C1B1A] antialiased selection:bg-[#A3704C]/10 selection:text-[#A3704C]">
 
+    <!-- Top Accent Ribbon -->
     <div class="h-1.5 bg-[#A3704C]"></div>
 
+    <!-- Navigation Header (Fixed padding bounds for clean spacing on mobile) -->
     <nav class="sticky top-0 bg-[#FBF9F6]/80 backdrop-blur-md border-b border-[#EBE7E0] z-40">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="transition-opacity hover:opacity-80">
-                <img src="MittiLogo.png" alt="Mitti Logo" class="h-20 md:h-24 w-auto object-contain">
+        <div class="max-w-6xl mx-auto px-4 md:px-6 py-2 md:py-4 flex justify-between items-center">
+            <a href="#" class="transition-opacity hover:opacity-80 block">
+                <!-- Mobile optimized height caps to stop elements colliding -->
+                <img src="MittiLogo.png" alt="Mitti Logo" class="h-16 sm:h-20 md:h-24 w-auto object-contain">
             </a>
             <div class="hidden md:flex space-x-10 text-[11px] tracking-[0.2em] uppercase font-medium text-[#5C5A57]">
                 <a href="#about" class="hover:text-[#A3704C] transition-colors">The Studio</a>
@@ -50,6 +54,7 @@
         </div>
     </nav>
 
+    <!-- Hero Showcase Frame -->
     <section class="max-w-6xl mx-auto px-6 pt-16 pb-24 md:pt-28 md:pb-36">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
             <div class="md:col-span-7 space-y-6">
@@ -83,10 +88,12 @@
         </div>
     </section>
 
+    <!-- Studio Philosophy & Leadership Section -->
     <section id="about" class="border-t border-b border-[#EBE7E0] bg-[#FAF7F2]">
         <div class="max-w-6xl mx-auto px-6 py-24">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
                 
+                <!-- Left Side: Profile Picture Asset -->
                 <div class="md:col-span-5 order-2 md:order-1">
                     <div class="aspect-[3/4] max-w-sm mx-auto bg-white rounded-2xl overflow-hidden shadow-sm border border-[#EBE7E0] relative group">
                         <img src="Priya_MittiFounder.jpg" alt="Priya — Founder of Mitti Studio" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
@@ -94,6 +101,7 @@
                     </div>
                 </div>
 
+                <!-- Right Side: Descriptive Profile Wording -->
                 <div class="md:col-span-7 order-1 md:order-2 space-y-6 text-center md:text-left">
                     <div class="space-y-2">
                         <p class="text-[10px] tracking-[0.2em] uppercase font-medium text-[#8A8681]">Studio Leadership</p>
@@ -109,6 +117,7 @@
         </div>
     </section>
 
+    <!-- Studio Tour Horizontal Gallery (Symmetric 16:10 Heights) -->
     <section id="studio-tour" class="max-w-6xl mx-auto px-6 py-24 md:py-32">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-end mb-12">
             <div class="md:col-span-7 space-y-3">
@@ -125,39 +134,46 @@
             </div>
         </div>
 
+        <!-- Carousel Frame -->
         <div class="relative">
             <div class="flex overflow-x-auto gap-6 snap-x no-scrollbar pb-4 scroll-smooth">
                 
+                <!-- Slide 1 -->
                 <div class="flex-none w-[85%] md:w-[55%] snap-center">
                     <div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group">
                         <img src="MittiStudio1.jpeg" alt="Mitti Pottery Studio View 1" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103">
                     </div>
                 </div>
 
+                <!-- Slide 2 -->
                 <div class="flex-none w-[85%] md:w-[55%] snap-center">
                     <div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group">
                         <img src="MittiStudio2.jpeg" alt="Mitti Pottery Studio View 2" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103">
                     </div>
                 </div>
 
+                <!-- Slide 3 -->
                 <div class="flex-none w-[85%] md:w-[55%] snap-center">
                     <div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group">
                         <img src="MittiStudio3.jpeg" alt="Mitti Pottery Studio View 3" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103">
                     </div>
                 </div>
 
+                <!-- Slide 4 -->
                 <div class="flex-none w-[85%] md:w-[55%] snap-center">
                     <div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group">
                         <img src="MittiStudio4.jpeg" alt="Mitti Pottery Studio View 4" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103">
                     </div>
                 </div>
 
+                <!-- Slide 5 -->
                 <div class="flex-none w-[85%] md:w-[55%] snap-center">
                     <div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group">
                         <img src="MittiStudio5.jpeg" alt="Mitti Pottery Studio View 5" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103">
                     </div>
                 </div>
 
+                <!-- Slide 6 -->
                 <div class="flex-none w-[85%] md:w-[55%] snap-center">
                     <div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group">
                         <img src="MittiStudio6.jpeg" alt="Mitti Pottery Studio View 6" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103">
@@ -166,6 +182,7 @@
 
             </div>
             
+            <!-- Indicator Guidelines Track -->
             <div class="flex justify-center md:justify-start gap-1.5 mt-5 opacity-40">
                 <span class="w-8 h-[2px] bg-[#A3704C]"></span>
                 <span class="w-2 h-[2px] bg-[#5C5A57]"></span>
@@ -177,6 +194,7 @@
         </div>
     </section>
 
+    <!-- Curated Workshop Packages -->
     <section id="workshops" class="max-w-6xl mx-auto px-6 py-24 md:py-32 space-y-16 border-t border-[#EBE7E0]">
         <div class="flex flex-col md:flex-row justify-between items-baseline gap-4 border-b border-[#EBE7E0] pb-6">
             <div>
@@ -187,6 +205,7 @@
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+            <!-- Course 1 -->
             <div class="space-y-4">
                 <div class="flex justify-between items-baseline border-b border-[#EBE7E0] pb-2">
                     <h3 class="text-xl font-serif font-light text-[#1C1B1A]">One-Time Pottery Experience</h3>
@@ -197,6 +216,7 @@
                 </p>
             </div>
 
+            <!-- Course 2 -->
             <div class="space-y-4">
                 <div class="flex justify-between items-baseline border-b border-[#EBE7E0] pb-2">
                     <h3 class="text-xl font-serif font-light text-[#1C1B1A]">Outdoor & Farm Handbuilding</h3>
@@ -207,6 +227,7 @@
                 </p>
             </div>
 
+            <!-- Course 3 -->
             <div class="space-y-4">
                 <div class="flex justify-between items-baseline border-b border-[#EBE7E0] pb-2">
                     <h3 class="text-xl font-serif font-light text-[#1C1B1A]">Clay Dates for Couples</h3>
@@ -217,6 +238,7 @@
                 </p>
             </div>
 
+            <!-- Course 4 -->
             <div class="space-y-4">
                 <div class="flex justify-between items-baseline border-b border-[#EBE7E0] pb-2">
                     <h3 class="text-xl font-serif font-light text-[#1C1B1A]">Summer & Holiday Workshops</h3>
@@ -229,6 +251,7 @@
         </div>
     </section>
 
+    <!-- Children's Fine Arts Corner -->
     <section id="kids" class="bg-[#FAF7F2] border-t border-b border-[#EBE7E0] py-24">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center max-w-xl mx-auto space-y-4 mb-16">
@@ -266,7 +289,9 @@
         </div>
     </section>
 
+    <!-- Custom Sessions & Group Bookings Section (FIXED FOR COMPACT DISPLAYS) -->
     <section id="custom-sessions" class="max-w-6xl mx-auto px-6 py-24 md:py-32 border-b border-[#EBE7E0]">
+        <!-- Top Informational Text Layout Elements -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
             <div class="lg:col-span-4 space-y-2">
                 <p class="text-[11px] tracking-[0.25em] uppercase font-semibold text-[#A3704C]">Tailored Gatherings</p>
@@ -289,26 +314,34 @@
             </div>
         </div>
 
+        <!-- Optimized Horizontal Slider Track (Allows uncompressed width space on mobile devices) -->
         <div class="relative w-full">
             <div class="flex overflow-x-auto gap-6 snap-x no-scrollbar pb-6 scroll-smooth w-full">
                 
-                <div class="flex-none w-[85%] sm:w-[48%] lg:w-[31%] snap-center bg-white p-2 rounded-2xl border border-[#EBE7E0] shadow-sm flex justify-center">
+                <!-- Reel 1: Outdoor Session -->
+                <div class="flex-none w-[290px] xs:w-[328px] sm:w-[48%] lg:w-[31%] snap-center bg-white p-2 rounded-2xl border border-[#EBE7E0] shadow-sm flex justify-center">
                     <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DWJlZi9j7wt/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; width: 100%;">
-                        </blockquote>
+                        <!-- Content auto-injected by script engine -->
+                    </blockquote>
                 </div>
 
-                <div class="flex-none w-[85%] sm:w-[48%] lg:w-[31%] snap-center bg-white p-2 rounded-2xl border border-[#EBE7E0] shadow-sm flex justify-center">
+                <!-- Reel 2: Group Session -->
+                <div class="flex-none w-[290px] xs:w-[328px] sm:w-[48%] lg:w-[31%] snap-center bg-white p-2 rounded-2xl border border-[#EBE7E0] shadow-sm flex justify-center">
                     <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DQEfFLYjI-E/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; width: 100%;">
-                        </blockquote>
+                        <!-- Content auto-injected by script engine -->
+                    </blockquote>
                 </div>
 
-                <div class="flex-none w-[85%] sm:w-[48%] lg:w-[31%] snap-center bg-white p-2 rounded-2xl border border-[#EBE7E0] shadow-sm flex justify-center">
+                <!-- Reel 3: School Workshop -->
+                <div class="flex-none w-[290px] xs:w-[328px] sm:w-[48%] lg:w-[31%] snap-center bg-white p-2 rounded-2xl border border-[#EBE7E0] shadow-sm flex justify-center">
                     <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DRwi9yAjySg/?utm_source=ig_embed&amp;utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; width: 100%;">
-                        </blockquote>
+                        <!-- Content auto-injected by script engine -->
+                    </blockquote>
                 </div>
 
             </div>
             
+            <!-- Mobile Track Cues -->
             <div class="flex justify-center lg:hidden gap-1.5 mt-2 opacity-40">
                 <span class="w-6 h-[2px] bg-[#A3704C]"></span>
                 <span class="w-2 h-[2px] bg-[#5C5A57]"></span>
@@ -317,6 +350,7 @@
         </div>
     </section>
 
+    <!-- Studio Policies Accordion Section -->
     <section id="faq" class="bg-[#FAF7F2] border-t border-b border-[#EBE7E0] py-24">
         <div class="max-w-3xl mx-auto px-6 space-y-8">
             <div class="text-center space-y-2">
@@ -348,6 +382,7 @@
         </div>
     </section>
 
+    <!-- Footer Space -->
     <footer id="contact" class="bg-[#1C1B1A] text-[#A6A39F] pt-20 pb-28 border-t-4 border-[#A3704C]">
         <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
             
@@ -389,6 +424,7 @@
         </div>
     </footer>
 
+    <!-- STICKY FLOATING ACTION FOOTER ACTION BAR -->
     <div class="fixed bottom-0 left-0 right-0 bg-[#FBF9F6]/90 backdrop-blur-md border-t border-[#EBE7E0] z-50 py-3 px-6 shadow-lg md:py-4">
         <div class="max-w-xl mx-auto flex gap-4 items-center justify-between">
             <p class="hidden sm:block text-[11px] font-medium uppercase tracking-widest text-[#5C5A57]">Ready to mold?</p>
@@ -403,6 +439,7 @@
         </div>
     </div>
 
+    <!-- Async Instagram SDK Engine Script Element -->
     <script async src="//www.instagram.com/embed.js"></script>
 
 </body>
