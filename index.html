@@ -24,13 +24,12 @@
     <nav class="sticky top-0 bg-[#FBF9F6]/80 backdrop-blur-md border-b border-[#EBE7E0] z-40">
         <div class="max-w-6xl mx-auto px-6 py-3 flex justify-between items-center">
             <a href="#" class="transition-opacity hover:opacity-80">
-                <img src="MittiLogo.png" alt="Mitti Logo" class="h-14 md:h-16 w-auto object-contain">
+                <img src="Mitti Logo 2028.PNG" alt="Mitti Logo" class="h-14 md:h-16 w-auto object-contain">
             </a>
             <div class="hidden md:flex space-x-10 text-[11px] tracking-[0.2em] uppercase font-medium text-[#5C5A57]">
                 <a href="#about" class="hover:text-[#A3704C] transition-colors">The Studio</a>
                 <a href="#workshops" class="hover:text-[#A3704C] transition-colors">Workshops</a>
                 <a href="#kids" class="hover:text-[#A3704C] transition-colors">Kids' Corner</a>
-                <!-- Updated label here -->
                 <a href="#custom-sessions" class="hover:text-[#A3704C] transition-colors">Group Events</a>
                 <a href="#faq" class="hover:text-[#A3704C] transition-colors">FAQ</a>
             </div>
@@ -59,26 +58,56 @@
             </div>
             
             <div class="md:col-span-5">
-                <div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden shadow-inner border border-[#EBE7E0] flex flex-col justify-center items-center p-8 text-center group">
-                    <div class="w-12 h-[1px] bg-[#A3704C] mb-4"></div>
-                    <p class="font-serif italic text-lg text-[#1C1B1A] mb-2">“Earth & Hands”</p>
-                    <p class="text-[11px] uppercase tracking-[0.15em] text-[#8A8681] font-light max-w-[200px]">
-                        [ Place a striking photo of wet clay spinning on the wheel here ]
-                    </p>
+                <div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden shadow-sm border border-[#EBE7E0] relative group">
+                    <!-- Live Hero Photo Asset -->
+                    <img src="hero-pottery.png" alt="Wet clay spinning on a potter wheel" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                    
+                    <!-- Elegant Text Overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#1C1B1A]/40 via-transparent to-transparent flex flex-col justify-end p-8 text-white transition-opacity duration-300 group-hover:opacity-90">
+                        <div class="w-12 h-[1px] bg-white/60 mb-3"></div>
+                        <p class="font-serif italic text-lg tracking-wide mb-1">“Earth & Hands”</p>
+                        <p class="text-[10px] uppercase tracking-[0.2em] text-white/80 font-light">The Wheel Experience</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Studio & Founder Philosophy -->
+    <!-- Studio & Founder Philosophy (UPDATED: Premium Two-Column Layout with Portrait Photo) -->
     <section id="about" class="border-t border-b border-[#EBE7E0] bg-[#FAF7F2]">
-        <div class="max-w-4xl mx-auto px-6 py-24 text-center space-y-6">
-            <p class="text-[10px] tracking-[0.2em] uppercase font-medium text-[#8A8681]">Studio Leadership</p>
-            <h2 class="text-2xl md:text-3xl font-serif font-light tracking-tight text-[#1C1B1A]">Guided by Priya</h2>
-            <div class="w-12 h-[1px] bg-[#A3704C] mx-auto"></div>
-            <p class="text-sm md:text-base text-[#5C5A57] leading-relaxed max-w-2xl mx-auto font-light">
-                Every throw, trim, and fire at Mitti is structured and personally led by <strong>Priya</strong>, an experienced professional artisan potter. Dedicated to stripping away the intimidation of clay, Priya guides minds of all milestones—from young toddlers discovering form to adults mastering utility on the wheel.
-            </p>
+        <div class="max-w-6xl mx-auto px-6 py-24">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Column: Priya's Portrait Image Holder -->
+                <div class="md:col-span-5 order-2 md:order-1">
+                    <div class="aspect-[3/4] max-w-sm mx-auto bg-white rounded-2xl overflow-hidden shadow-sm border border-[#EBE7E0] relative group">
+                        <!-- Live Portrait Photo Asset -->
+                        <img src="Priya_MittiFounder.jpg" alt="Priya — Founder of Mitti Studio" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                        
+                        <!-- Overlay Frame Details -->
+                        <div class="absolute inset-0 border border-inset border-white/20 rounded-2xl pointer-events-none"></div>
+                        
+                        <!-- Temporary Placeholder Text: This hides automatically behind the photo once loaded, but acts as a backup design fallback -->
+                        <div class="absolute inset-0 flex flex-col justify-center items-center bg-[#FAF7F2] text-center p-6 group-hover:bg-transparent transition-colors duration-500 z-[-1]">
+                            <p class="font-serif italic text-base text-[#1C1B1A] mb-1">Priya</p>
+                            <p class="text-[9px] uppercase tracking-[0.2em] text-[#8A8681] font-light">[ Portrait Image ]</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Story Copy -->
+                <div class="md:col-span-7 order-1 md:order-2 space-y-6 text-center md:text-left">
+                    <div class="space-y-2">
+                        <p class="text-[10px] tracking-[0.2em] uppercase font-medium text-[#8A8681]">Studio Leadership</p>
+                        <h2 class="text-3xl font-serif font-light tracking-tight text-[#1C1B1A]">Guided by Priya</h2>
+                        <div class="w-12 h-[1px] bg-[#A3704C] mx-auto md:mx-0"></div>
+                    </div>
+                    <p class="text-sm md:text-base text-[#5C5A57] leading-relaxed font-light">
+                        Every throw, trim, and fire at Mitti is structured and personally led by <strong>Priya</strong>, an experienced professional artisan potter. Dedicated to stripping away the intimidation of clay, Priya guides minds of all milestones—from young toddlers discovering form to adults mastering utility on the wheel.
+                    </p>
+                </div>
+
+            </div>
         </div>
     </section>
 
@@ -183,7 +212,6 @@
         <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-baseline">
             <div class="md:col-span-4">
                 <p class="text-[11px] tracking-[0.25em] uppercase font-semibold text-[#A3704C] mb-2">Tailored Gatherings</p>
-                <!-- Updated Heading word choice -->
                 <h3 class="text-3xl font-serif font-light text-[#1C1B1A] tracking-tight">Custom Events & Private Group Sessions.</h3>
             </div>
             <div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-8 text-sm">
@@ -221,7 +249,7 @@
                 </div>
                 <div class="bg-white p-5 rounded-lg border border-[#EBE7E0] space-y-2">
                     <h4 class="font-medium text-[#1C1B1A]">👉 What should I wear to a clay workshop?</h4>
-                    <p class="text-xs leading-relaxed">Don't worry about the mess—clay washes out entirely, and we provide aprons to keep your clothes protected! For a seamless session, just wear comfortable clothes and flat, closed-toe shoes. Pro tip for the potter's wheel: tie back long hair and trim your nails short for a much better grip on the clay!</p>
+                    <p class="text-xs leading-relaxed">While clay washes out completely, we highly recommend arriving in comfortable, casual clothing and flat, closed-toe shoes. We will provide you with studio aprons to protect your clothes while creating. For your comfort and safety on the wheel, please keep long hair tied back—and trimming your nails short is incredibly helpful!</p>
                 </div>
                 <div class="bg-white p-5 rounded-lg border border-[#EBE7E0] space-y-2">
                     <h4 class="font-medium text-[#1C1B1A]">👉 What is your cancellation and booking policy?</h4>
