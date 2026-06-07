@@ -7,17 +7,29 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght=0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght=0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght=300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         html { scroll-behavior: smooth; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .font-serif { font-family: 'Playfair Display', serif; }
         
-        .snap-x { scroll-snap-type: x mandatory; }
-        .snap-center { scroll-snap-align: center; }
-        
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Pure CSS Infinite Marquee Animation Engine */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: max-content;
+            animation: marquee 75s linear infinite;
+        }
+        /* Pause scroll on hover to let premium clients admire a piece closely */
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
     </style>
 </head>
 <body class="bg-[#FBF9F6] text-[#1C1B1A] antialiased selection:bg-[#A3704C]/10 selection:text-[#A3704C]">
@@ -118,18 +130,14 @@
             </div>
         </div>
 
-        <div class="relative">
-            <div class="flex overflow-x-auto gap-6 snap-x no-scrollbar pb-4 scroll-smooth w-full">
-                <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group"><img src="MittiStudio1.jpeg" alt="View 1" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
-                <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group"><img src="MittiStudio2.jpeg" alt="View 2" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
-                <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group"><img src="MittiStudio3.jpeg" alt="View 3" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
-                <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group"><img src="MittiStudio4.jpeg" alt="View 4" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
-                <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group"><img src="MittiStudio5.jpeg" alt="View 5" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
-                <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group"><img src="MittiStudio6.jpeg" alt="View 6" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
-            </div>
-            
-            <div class="w-full max-w-[120px] h-[3px] bg-[#EBE7E0] mt-6 rounded-full overflow-hidden relative">
-                <div class="bg-[#A3704C] h-full w-1/3 rounded-full"></div>
+        <div class="relative w-full overflow-hidden">
+            <div class="flex overflow-x-auto gap-6 no-scrollbar pb-4 scroll-smooth w-full">
+                <div class="flex-none w-[85%] md:w-[55%]"><div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group"><img src="MittiStudio1.jpeg" alt="View 1" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
+                <div class="flex-none w-[85%] md:w-[55%]"><div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group"><img src="MittiStudio2.jpeg" alt="View 2" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
+                <div class="flex-none w-[85%] md:w-[55%]"><div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group"><img src="MittiStudio3.jpeg" alt="View 3" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
+                <div class="flex-none w-[85%] md:w-[55%]"><div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group"><img src="MittiStudio4.jpeg" alt="View 4" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
+                <div class="flex-none w-[85%] md:w-[55%]"><div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group"><img src="MittiStudio5.jpeg" alt="View 5" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
+                <div class="flex-none w-[85%] md:w-[55%]"><div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group"><img src="MittiStudio6.jpeg" alt="View 6" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
             </div>
         </div>
     </section>
@@ -283,26 +291,63 @@
             </div>
         </div>
 
-        <div class="relative w-full">
-            <div class="flex overflow-x-auto gap-4 snap-x no-scrollbar pb-6 scroll-smooth w-full">
-                <div class="flex-none w-[240px] xs:w-[260px] sm:w-[32%] lg:w-[22%] snap-center"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct1.jpeg" alt="Bespoke Piece 1" class="w-full h-full object-cover"></div></div>
-                <div class="flex-none w-[240px] xs:w-[260px] sm:w-[32%] lg:w-[22%] snap-center"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct2.jpeg" alt="Bespoke Piece 2" class="w-full h-full object-cover"></div></div>
-                <div class="flex-none w-[240px] xs:w-[260px] sm:w-[32%] lg:w-[22%] snap-center"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct3.jpeg" alt="Bespoke Piece 3" class="w-full h-full object-cover"></div></div>
-                <div class="flex-none w-[240px] xs:w-[260px] sm:w-[32%] lg:w-[22%] snap-center"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct4.jpeg" alt="Bespoke Piece 4" class="w-full h-full object-cover"></div></div>
-                <div class="flex-none w-[240px] xs:w-[260px] sm:w-[32%] lg:w-[22%] snap-center"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct5.jpeg" alt="Bespoke Piece 5" class="w-full h-full object-cover"></div></div>
-                <div class="flex-none w-[240px] xs:w-[260px] sm:w-[32%] lg:w-[22%] snap-center"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct6.jpeg" alt="Bespoke Piece 6" class="w-full h-full object-cover"></div></div>
-                <div class="flex-none w-[240px] xs:w-[260px] sm:w-[32%] lg:w-[22%] snap-center"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct7.jpeg" alt="Bespoke Piece 7" class="w-full h-full object-cover"></div></div>
-                <div class="flex-none w-[240px] xs:w-[260px] sm:w-[32%] lg:w-[22%] snap-center"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct8.jpeg" alt="Bespoke Piece 8" class="w-full h-full object-cover"></div></div>
-                <div class="flex-none w-[240px] xs:w-[260px] sm:w-[32%] lg:w-[22%] snap-center"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct9.jpeg" alt="Bespoke Piece 9" class="w-full h-full object-cover"></div></div>
-                <div class="flex-none w-[240px] xs:w-[260px] sm:w-[32%] lg:w-[22%] snap-center"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct10.jpeg" alt="Bespoke Piece 10" class="w-full h-full object-cover"></div></div>
-                <div class="flex-none w-[240px] xs:w-[260px] sm:w-[32%] lg:w-[22%] snap-center"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct11.jpeg" alt="Bespoke Piece 11" class="w-full h-full object-cover"></div></div>
-                <div class="flex-none w-[240px] xs:w-[260px] sm:w-[32%] lg:w-[22%] snap-center"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct12.jpeg" alt="Bespoke Piece 12" class="w-full h-full object-cover"></div></div>
-                <div class="flex-none w-[240px] xs:w-[260px] sm:w-[32%] lg:w-[22%] snap-center"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct13.jpeg" alt="Bespoke Piece 13" class="w-full h-full object-cover"></div></div>
-                <div class="flex-none w-[240px] xs:w-[260px] sm:w-[32%] lg:w-[22%] snap-center"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct14.jpeg" alt="Bespoke Piece 14" class="w-full h-full object-cover"></div></div>
-                <div class="flex-none w-[240px] xs:w-[260px] sm:w-[32%] lg:w-[22%] snap-center"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct15.jpeg" alt="Bespoke Piece 15" class="w-full h-full object-cover"></div></div>
-                <div class="flex-none w-[240px] xs:w-[260px] sm:w-[32%] lg:w-[22%] snap-center"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct16.jpeg" alt="Bespoke Piece 16" class="w-full h-full object-cover"></div></div>
-                <div class="flex-none w-[240px] xs:w-[260px] sm:w-[32%] lg:w-[22%] snap-center"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct17.jpeg" alt="Bespoke Piece 17" class="w-full h-full object-cover"></div></div>
-                <div class="flex-none w-[240px] xs:w-[260px] sm:w-[32%] lg:w-[22%] snap-center"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct18.jpeg" alt="Bespoke Piece 18" class="w-full h-full object-cover"></div></div>
+        <div class="w-full overflow-hidden relative py-4 bg-[#FBF9F6]">
+            <div class="animate-marquee gap-4">
+                <div class="flex gap-4 pr-4">
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct1.jpeg" alt="Piece 1" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct2.jpeg" alt="Piece 2" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct3.jpeg" alt="Piece 3" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct4.jpeg" alt="Piece 4" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct5.jpeg" alt="Piece 5" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct6.jpeg" alt="Piece 6" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct7.jpeg" alt="Piece 7" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct8.jpeg" alt="Piece 8" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct9.jpeg" alt="Piece 9" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct10.jpeg" alt="Piece 10" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct11.jpeg" alt="Piece 11" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct12.jpeg" alt="Piece 12" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct13.jpeg" alt="Piece 13" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct14.jpeg" alt="Piece 14" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct15.jpeg" alt="Piece 15" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct16.jpeg" alt="Piece 16" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct17.jpeg" alt="Piece 17" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct18.jpeg" alt="Piece 18" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct19.jpeg" alt="Piece 19" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct20.jpeg" alt="Piece 20" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct21.jpeg" alt="Piece 21" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct22.jpeg" alt="Piece 22" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct23.jpeg" alt="Piece 23" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct24.jpeg" alt="Piece 24" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct25.jpeg" alt="Piece 25" class="w-full h-full object-cover"></div></div>
+                </div>
+
+                <div class="flex gap-4 aria-hidden='true'">
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct1.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct2.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct3.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct4.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct5.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct6.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct7.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct8.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct9.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct10.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct11.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct12.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct13.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct14.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct15.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct16.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct17.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct18.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct19.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct20.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct21.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct22.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct23.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct24.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                    <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm"><img src="MittiProduct25.jpeg" alt="" class="w-full h-full object-cover"></div></div>
+                </div>
             </div>
         </div>
     </section>
