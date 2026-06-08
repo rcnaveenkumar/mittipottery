@@ -16,7 +16,7 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* Interactive slider adjustments */
+        /* Interactive custom slider track parameters */
         .marquee-container {
             display: flex;
             gap: 16px;
@@ -210,7 +210,7 @@
         <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div class="lg:col-span-4 space-y-4">
                 <p class="text-[11px] tracking-[0.25em] uppercase font-bold text-[#A3704C]">Structured Learning</p>
-                <h2 class="text-3xl font-serif font-light text-[#1C1B1A] tracking-tight">Beginner Pottery Course</h2>
+                <h2 class="text-3xl font-serif font-light text-[#1C1B1A]">Beginner Pottery Course</h2>
                 <p class="text-sm text-[#3A3836] font-normal leading-relaxed">Design patterns created for absolute beginners who want to explore and conquer the fundamentals of pottery through both handbuilding and wheel throwing techniques.</p>
                 <div class="bg-white p-5 rounded-xl border border-[#EBE7E0] inline-block w-full shadow-sm">
                     <p class="text-xs tracking-wider uppercase font-bold text-[#1C1B1A] mb-1">Course Structure</p>
@@ -256,7 +256,7 @@
                     <h4 class="font-serif text-lg text-[#1C1B1A]">Children's Events</h4>
                     <p class="text-xs text-[#3A3836] leading-relaxed font-normal">Interactive children's milestones centered around real clay assignments, keeping little hands productively molding.</p>
                 </div>
-                <div class="bg-white p-8 rounded-xl border border-[#EBE7E0] shadow-sm space-y-3">
+                <div class="bg-white p-8 rounded-xl border border-[#EBE7E0] space-y-3 shadow-sm">
                     <span class="text-xs uppercase font-bold tracking-wider text-[#A3704C]">Mediums</span>
                     <h4 class="font-serif text-lg text-[#1C1B1A]">Hands-On Workshops</h4>
                     <p class="text-xs text-[#3A3836] leading-relaxed font-normal">Immersive step-by-step guidance exploring tactile textures, vibrant watercolor exploration, and custom texturing techniques.</p>
@@ -270,51 +270,76 @@
         </div>
     </section>
 
-    <section id="products" class="max-w-6xl mx-auto px-6 py-24 md:py-32 border-b border-[#EBE7E0]">
-        <div class="flex flex-col md:flex-row justify-between items-start gap-6 mb-12">
-            <div class="space-y-3">
-                <p class="text-[11px] tracking-[0.25em] uppercase font-bold text-[#A3704C]">Handcrafted Collection</p>
-                <h2 class="text-3xl font-serif font-light text-[#1C1B1A] tracking-tight">Custom Ceramic Creations</h2>
-                <p class="text-sm text-[#3A3836] font-normal max-w-xl leading-relaxed">
-                    Explore a selected dynamic showcase of premium custom orders and unique stoneware articles created personally by Priya. 
-                    <strong class="text-[#A3704C] block mt-2 font-medium">Have a specific design framework in mind? We accept tailored custom orders to bring your personal concept shapes to life.</strong>
-                </p>
-            </div>
-            <div class="pt-2 md:pt-6 flex-none">
-                <a href="https://wa.me/918277292337?text=Hi%20Priya%2c%20I%20was%20browsing%20your%20custom%20ceramic%20creations%20lookbook%20and%20have%20an%20idea%20for%20a%20custom%20order.%20I'd%20love%20to%20share%20my%20design%20idea%20with%20you!" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#A3704C] hover:bg-[#8F5F3D] text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-lg transition-colors shadow-sm">
-                    ✨ Discuss a Custom Order
-                </a>
-            </div>
-        </div>
+    <section id="products" class="max-w-6xl mx-auto px-6 py-24 border-b border-[#EBE7E0]">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            
+            <div class="lg:col-span-5 space-y-10">
+                <div class="space-y-3">
+                    <p class="text-[11px] tracking-[0.25em] uppercase font-bold text-[#A3704C]">Handcrafted Collection</p>
+                    <h2 class="text-3xl font-serif font-light text-[#1C1B1A] tracking-tight">Custom Ceramic Creations</h2>
+                    <p class="text-sm text-[#3A3836] font-normal leading-relaxed">
+                        Explore a selected dynamic showcase of premium custom orders and unique stoneware articles created personally by Priya. 
+                        <strong class="text-[#A3704C] block mt-2 font-medium">Have a specific design framework in mind? We accept tailored custom orders to bring your personal concept shapes to life.</strong>
+                    </p>
+                </div>
 
-        <div class="w-full overflow-x-auto no-scrollbar relative py-4 bg-[#FBF9F6]" id="marquee-viewport">
-            <div class="marquee-container" id="marquee-track">
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct1.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct2.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct3.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct4.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct5.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct6.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct7.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct8.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct9.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct10.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct11.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct12.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct13.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct14.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct15.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct16.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct17.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct18.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct19.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct20.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct21.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct22.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct23.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct24.jpeg" class="w-full h-full object-cover"></div></div>
-                <div class="w-[200px] xs:w-[220px] sm:w-[240px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct25.jpeg" class="w-full h-full object-cover"></div></div>
+                <div class="space-y-8 text-xs md:text-sm text-[#3A3836] font-normal leading-relaxed border-t pt-8 border-[#EBE7E0]">
+                    <div class="space-y-2">
+                        <h4 class="font-bold text-[#1C1B1A] font-serif text-base">The Tailored Commission Process</h4>
+                        <p>Every single custom piece commissioned at Mitti follows an intentional, collaborative design workflow path. Priya works with you directly to map out dimensional constraints, utility requirements, and color profiles before clay touches the wheel.</p>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="font-bold text-[#1C1B1A] font-serif text-base">Bespoke Structural Frameworks</h4>
+                        <p>Whether you require uniform, signature dining sets explicitly proportioned to match your architectural kitchen tables or complex structural porcelain lamp bases patterned for unique ambient spaces, we accept custom orders of all scopes.</p>
+                    </div>
+                    <div class="space-y-2">
+                        <h4 class="font-bold text-[#1C1B1A] font-serif text-base">Timeline & Studio Firing Cycles</h4>
+                        <p>Because authentic high-end ceramics require unhurried processing thresholds, custom orders typically take 4 to 6 weeks from initial layout sign-off to final glaze firing loops. Quality craft cannot be rushed.</p>
+                    </div>
+                </div>
+
+                <div class="pt-4">
+                    <a href="https://wa.me/918277292337?text=Hi%20Priya%2c%20I%20was%20browsing%20your%20custom%20ceramic%20creations%20lookbook%20and%20have%20an%20idea%20for%20a%20custom%20order.%20I'd%20love%20to%20share%20my%20design%20idea%20with%20you!" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-[#A3704C] hover:bg-[#8F5F3D] text-white text-xs font-bold uppercase tracking-wider px-6 py-4 rounded-xl transition-colors shadow-sm w-full sm:w-auto">
+                        ✨ Discuss a Custom Order
+                    </a>
+                </div>
             </div>
+
+            <div class="lg:col-span-7 lg:sticky lg:top-28 w-full overflow-hidden">
+                <div class="relative w-full overflow-x-auto no-scrollbar py-2" id="marquee-viewport">
+                    <div class="marquee-container" id="marquee-track">
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct1.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct2.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct3.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct4.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct5.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct6.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct7.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct8.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct9.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct10.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct11.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct12.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct13.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct14.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct15.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct16.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct17.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct18.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct19.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct20.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct21.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct22.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct23.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct24.jpeg" class="w-full h-full object-cover"></div></div>
+                        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm select-none pointer-events-none"><img src="MittiProduct25.jpeg" class="w-full h-full object-cover"></div></div>
+                    </div>
+                    <div class="absolute bottom-6 right-6 bg-[#1C1B1A]/80 text-white text-[9px] uppercase tracking-widest px-3 py-1.5 rounded border border-white/5 backdrop-blur-sm pointer-events-none font-medium">
+                        Swipe Lookbook ↔
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -423,7 +448,7 @@
         const viewport = document.getElementById('marquee-viewport');
         const track = document.getElementById('marquee-track');
         
-        // Clone items programmatically to guarantee smooth infinite math loops
+        // Clone cards programmatically to create a flawless mathematical loop wrap
         const originalCards = Array.from(track.children);
         originalCards.forEach(card => {
             const clone = card.cloneNode(true);
@@ -434,14 +459,13 @@
         let isDown = false;
         let startX;
         let scrollLeft;
-        let scrollSpeed = 0.6; // Speed configuration control parameter
+        let scrollSpeed = 0.5; // Custom slow tracking velocity control
         let autoScrollActive = true;
 
-        // Auto Scroll loop animation engine frame execution
+        // Auto Scroll Frame Animation Matrix Loop Loop
         function step() {
             if (autoScrollActive && !isDown) {
                 viewport.scrollLeft += scrollSpeed;
-                // Infinite boundary jump logic check tracking bounds thresholds cleanly
                 if (viewport.scrollLeft >= track.scrollWidth / 2) {
                     viewport.scrollLeft = 0;
                 }
@@ -450,7 +474,7 @@
         }
         requestAnimationFrame(step);
 
-        // Desktop Mouse Drag interactions binding mechanics context
+        // Desktop Mouse Drag interaction parameters
         viewport.addEventListener('mousedown', (e) => {
             isDown = true;
             autoScrollActive = false;
@@ -472,11 +496,11 @@
             if (!isDown) return;
             e.preventDefault();
             const x = e.pageX - viewport.offsetLeft;
-            const walk = (x - startX) * 1.5; // Drag sensitivity scale multiplier context parameter
+            const walk = (x - startX) * 1.5; // Drag precision dampener multiplier
             viewport.scrollLeft = scrollLeft - walk;
         });
 
-        // Pause scroll instantly on manual finger touch parameters to ensure smooth performance handling
+        // Pause scroll automatically on mobile/tablet user manual swipe touch
         viewport.addEventListener('touchstart', () => {
             autoScrollActive = false;
         }, { passive: true });
