@@ -22,6 +22,7 @@
             gap: 16px;
             width: max-content;
             cursor: grab;
+            touch-action: pan-y; /* Crucial: Allows flawless natural native page scrolling on mobile while swiping elements */
         }
         .marquee-container:active {
             cursor: grabbing;
@@ -247,7 +248,7 @@
         <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div class="lg:col-span-4 space-y-4">
                 <p class="text-[11px] tracking-[0.25em] uppercase font-bold text-[#A3704C]">Structured Learning</p>
-                <h2 class="text-3xl font-serif font-light text-[#1C1B1A] tracking-tight">Beginner Pottery Course</h2>
+                <h2 class="text-3xl font-serif font-light text-[#1C1B1A]">Beginner Pottery Course</h2>
                 <p class="text-sm text-[#3A3836] font-normal leading-relaxed">Design patterns created for absolute beginners who want to explore and conquer the fundamentals of pottery through both handbuilding and wheel throwing techniques.</p>
                 <div class="bg-white p-5 rounded-xl border border-[#EBE7E0] inline-block w-full shadow-sm">
                     <p class="text-xs tracking-wider uppercase font-bold text-[#1C1B1A] mb-1">Course Structure</p>
@@ -482,18 +483,18 @@
     </div>
 
     <script>
-        function setupInteractiveMarquee(containerId, listId, reverse = false) {
+        function setupInteractiveMarquee(containerId, listId) {
             const viewport = document.getElementById(containerId);
             const track = document.getElementById(listId);
             if (!viewport || !track) return;
 
-            // Clear any previously duplicated clones to prevent layout stacking bugs
+            // Clear any previously duplicated clones safely
             const elements = Array.from(track.children);
             elements.forEach(card => {
                 if(card.getAttribute('aria-hidden') === 'true') card.remove();
             });
 
-            // Clean Programmatic Loop Cloning Block
+            // Programmatic Infinite Loop Duplicate Clones Node Addition
             const freshElements = Array.from(track.children);
             freshElements.forEach(card => {
                 const clone = card.cloneNode(true);
@@ -504,32 +505,22 @@
             let isDown = false;
             let startX;
             let scrollLeft;
-            let speed = 0.5;
+            let speed = 0.5; // Shared uniform slow forward velocity vector
             let autoScroll = true;
 
+            // Unified Forward loop logic path execution frame loop
             function runLoop() {
                 if (autoScroll && !isDown) {
-                    if (reverse) {
-                        viewport.scrollLeft -= speed;
-                        if (viewport.scrollLeft <= 0) {
-                            viewport.scrollLeft = track.scrollWidth / 2;
-                        }
-                    } else {
-                        viewport.scrollLeft += speed;
-                        if (viewport.scrollLeft >= track.scrollWidth / 2) {
-                            viewport.scrollLeft = 0;
-                        }
+                    viewport.scrollLeft += speed;
+                    if (viewport.scrollLeft >= track.scrollWidth / 2) {
+                        viewport.scrollLeft = 0;
                     }
                 }
                 requestAnimationFrame(runLoop);
             }
-
-            if (reverse) {
-                setTimeout(() => { viewport.scrollLeft = track.scrollWidth / 2; }, 150);
-            }
             requestAnimationFrame(runLoop);
 
-            // Bind Touch/Mouse Triggers to individual isolated targets cleanly
+            // Desktop Mouse Drag interaction gesture mappings
             viewport.addEventListener('mousedown', (e) => {
                 isDown = true;
                 autoScroll = false;
@@ -540,18 +531,26 @@
             viewport.addEventListener('mouseup', () => { isDown = false; autoScroll = true; });
             viewport.addEventListener('mousemove', (e) => {
                 if (!isDown) return;
+                // Only prevent default on desktop mouse movements to allow native responsive mobile pan threads
                 e.preventDefault();
                 const x = e.pageX - viewport.offsetLeft;
                 const walk = (x - startX) * 1.4;
                 viewport.scrollLeft = scrollLeft - walk;
             });
-            viewport.addEventListener('touchstart', () => { autoScroll = false; }, { passive: true });
-            viewport.addEventListener('touchend', () => { autoScroll = true; }, { passive: true });
+
+            // Mobile-Isolated Touch momentum tracking paths without page layout freeze bugs
+            viewport.addEventListener('touchstart', () => { 
+                autoScroll = false; 
+            }, { passive: true });
+            
+            viewport.addEventListener('touchend', () => { 
+                autoScroll = true; 
+            }, { passive: true });
         }
 
-        // Initialize both targets separately to lock in touch interactions completely
-        setupInteractiveMarquee('product-viewport', 'product-track', false);
-        setupInteractiveMarquee('student-viewport', 'student-track', true);
+        // Initialize targets separately - Now both move perfectly forward and allow touch swipe inputs flawlessly
+        setupInteractiveMarquee('product-viewport', 'product-track');
+        setupInteractiveMarquee('student-viewport', 'student-track');
     </script>
 
     <script async src="https://www.instagram.com/embed.js"></script>
