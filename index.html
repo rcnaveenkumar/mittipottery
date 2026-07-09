@@ -1,632 +1,1370 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mitti — Pottery & Art Experiences</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght=0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght=300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .font-serif { font-family: 'Playfair Display', serif; }
-        
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        /* Premium Interactive Drag Track Parameters */
-        .marquee-container {
-            display: flex;
-            gap: 16px;
-            width: max-content;
-            cursor: grab;
-            -webkit-user-select: none;
-            user-select: none;
-        }
-        .marquee-container:active {
-            cursor: grabbing;
-        }
-        
-        /* Anti-Flicker Viewport Constraint Layer */
-        .viewport-layer {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-            touch-action: pan-y; /* Allows natural vertical page scrolling while locking horizontal gestures to our loop thread */
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mitti — The Pottery Studio</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2A2622;
+    --ink-soft:#5C564D;
+    --paper:#F3EDE2;
+    --paper-deep:#EAE1D0;
+    --card:#FFFCF6;
+    --line: rgba(42,38,34,0.12);
+    --celadon:#6E8570;
+    --celadon-dark:#516155;
+    --celadon-tint:#E4E9DF;
+    --ember:#AE5A32;
+    --ember-tint:#F1DDCB;
+    --gold:#B08B4F;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif; background:var(--paper); color:var(--ink);}
+  .font-display{font-family:'Fraunces',serif; font-optical-sizing:auto;}
+  .no-scrollbar::-webkit-scrollbar{display:none;}
+  .no-scrollbar{-ms-overflow-style:none; scrollbar-width:none;}
+
+  /* throw-rings — the signature motif: concentric grooves like a finger drawn across a wheel-thrown pot */
+  .throw-rings{
+    background-image: repeating-radial-gradient(circle at 12% 30%, transparent 0, transparent 26px, var(--line) 27px, transparent 28px);
+    background-size: 340px 340px;
+    background-repeat: no-repeat;
+  }
+  .throw-divider{
+    height: 34px;
+    background-image: repeating-linear-gradient(180deg, transparent 0 3px, var(--line) 3px 4px);
+    background-size: 100% 34px;
+    opacity: .55;
+    mask-image: linear-gradient(90deg, transparent, black 15%, black 85%, transparent);
+  }
+  .eyebrow{
+    font-size: 11px; letter-spacing: .22em; text-transform: uppercase; font-weight:700;
+    color: var(--celadon-dark);
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .eyebrow::before{
+    content:''; width:16px; height:16px; border-radius:50%;
+    border: 2px solid currentColor; border-top-color: transparent;
+  }
+  .btn-primary{
+    background: var(--ink); color: #fff; font-weight:600; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    padding: 14px 26px; border-radius: 999px; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    transition: transform .25s ease, background .25s ease;
+  }
+  .btn-primary:hover{ background: var(--celadon-dark); transform: translateY(-1px); }
+  .btn-outline{
+    border:1.5px solid var(--ink); color: var(--ink); font-weight:600; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    padding: 13px 26px; border-radius: 999px; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    transition: all .25s ease;
+  }
+  .btn-outline:hover{ background: var(--ink); color:#fff; }
+  .btn-whatsapp{
+    background:#3F7A54; color:#fff; font-weight:700; font-size:12px; letter-spacing:.05em;
+    padding: 13px 20px; border-radius: 999px; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    transition: transform .2s ease, background .2s ease;
+  }
+  .btn-whatsapp:hover{ background:#356b48; transform: translateY(-1px); }
+
+  .card{ background: var(--card); border:1px solid var(--line); border-radius: 20px; }
+
+  .marquee-container{ display:flex; gap:16px; width:max-content; cursor:grab; -webkit-user-select:none; user-select:none; }
+  .marquee-container:active{ cursor:grabbing; }
+  .viewport-layer{ position:relative; width:100%; overflow:hidden; touch-action: pan-y; }
+
+  /* mobile menu */
+  #mobile-menu{ transform: translateY(-8px); opacity:0; pointer-events:none; transition: all .28s ease; }
+  #mobile-menu.open{ transform: translateY(0); opacity:1; pointer-events:auto; }
+  .menu-line{ display:block; width:22px; height:2px; background: var(--ink); transition: all .25s ease; }
+  #menu-toggle.open .menu-line:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+  #menu-toggle.open .menu-line:nth-child(2){ opacity:0; }
+  #menu-toggle.open .menu-line:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+
+  .fade-up{ opacity:0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+  .fade-up.in{ opacity:1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    .fade-up{ opacity:1; transform:none; transition:none; }
+  }
+</style>
 </head>
-<body class="bg-[#FBF9F6] text-[#1C1B1A] antialiased selection:bg-[#A3704C]/10 selection:text-[#A3704C]">
+<body class="antialiased selection:bg-[#6E8570]/20 selection:text-[#2A2622]">
 
-    <div class="h-1.5 bg-[#A3704C]"></div>
+<div class="h-1.5 bg-gradient-to-r from-[#AE5A32] via-[#B08B4F] to-[#6E8570]"></div>
 
-    <nav class="sticky top-0 bg-[#FBF9F6]/80 backdrop-blur-md border-b border-[#EBE7E0] z-40">
-        <div class="max-w-6xl mx-auto px-4 md:px-6 py-2 md:py-4 flex justify-between items-center">
-            <a href="#" class="transition-opacity hover:opacity-80 block">
-                <img src="MittiLogo.png" alt="Mitti Logo" class="h-16 sm:h-20 md:h-24 w-auto object-contain">
-            </a>
-            <div class="hidden lg:flex space-x-10 text-[11px] tracking-[0.2em] uppercase font-bold text-[#3A3836]">
-                <a href="#about" class="hover:text-[#A3704C] transition-colors">The Studio</a>
-                <a href="#studio-tour" class="hover:text-[#A3704C] transition-colors">Studio Tour</a>
-                <a href="#workshops" class="hover:text-[#A3704C] transition-colors">Workshops</a>
-                <a href="#courses" class="hover:text-[#A3704C] transition-colors">Beginner Course</a>
-                <a href="#kids" class="hover:text-[#A3704C] transition-colors">Kids' Corner</a>
-                <a href="#products" class="hover:text-[#A3704C] transition-colors">Custom Orders</a>
-                <a href="#custom-sessions" class="hover:text-[#A3704C] transition-colors">Group Events</a>
-                <a href="#faq" class="hover:text-[#A3704C] transition-colors">FAQ</a>
-            </div>
+<!-- NAV -->
+<nav class="sticky top-0 bg-[#F3EDE2]/90 backdrop-blur-md border-b border-[var(--line)] z-40">
+  <div class="max-w-6xl mx-auto px-5 md:px-6 py-3 md:py-4 flex justify-between items-center">
+    <a href="#" class="transition-opacity hover:opacity-80 block shrink-0">
+      <img src="MittiLogo-cropped.png" alt="Mitti Logo" class="h-16 sm:h-20 md:h-24 w-auto object-contain object-left">
+    </a>
+    <div class="hidden lg:flex space-x-8 text-[11px] tracking-[0.18em] uppercase font-semibold text-[var(--ink-soft)]">
+      <a href="#about" class="hover:text-[var(--celadon-dark)] transition-colors">The Studio</a>
+      <a href="#studio-tour" class="hover:text-[var(--celadon-dark)] transition-colors">Studio Tour</a>
+      <a href="#workshops" class="hover:text-[var(--celadon-dark)] transition-colors">Workshops</a>
+      <a href="#courses" class="hover:text-[var(--celadon-dark)] transition-colors">Beginner Course</a>
+      <a href="#kids" class="hover:text-[var(--celadon-dark)] transition-colors">Kids' Corner</a>
+      <a href="#products" class="hover:text-[var(--celadon-dark)] transition-colors">Custom Orders</a>
+      <a href="#custom-sessions" class="hover:text-[var(--celadon-dark)] transition-colors">Group Events</a>
+      <a href="#faq" class="hover:text-[var(--celadon-dark)] transition-colors">FAQ</a>
+    </div>
+    <a href="https://wa.me/918277292337" target="_blank" rel="noopener noreferrer" class="hidden lg:inline-flex btn-whatsapp">💬 WhatsApp</a>
+    <button id="menu-toggle" class="lg:hidden flex flex-col gap-[6px] p-2 -mr-2" aria-label="Toggle menu" aria-expanded="false">
+      <span class="menu-line"></span><span class="menu-line"></span><span class="menu-line"></span>
+    </button>
+  </div>
+  <div id="mobile-menu" class="lg:hidden absolute left-0 right-0 bg-[#F3EDE2] border-b border-[var(--line)] shadow-lg">
+    <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col gap-1 text-sm font-semibold text-[var(--ink)]">
+      <a href="#about" class="menu-link py-3 border-b border-[var(--line)]">The Studio</a>
+      <a href="#studio-tour" class="menu-link py-3 border-b border-[var(--line)]">Studio Tour</a>
+      <a href="#workshops" class="menu-link py-3 border-b border-[var(--line)]">Workshops</a>
+      <a href="#courses" class="menu-link py-3 border-b border-[var(--line)]">Beginner Course</a>
+      <a href="#kids" class="menu-link py-3 border-b border-[var(--line)]">Kids' Corner</a>
+      <a href="#products" class="menu-link py-3 border-b border-[var(--line)]">Custom Orders</a>
+      <a href="#custom-sessions" class="menu-link py-3 border-b border-[var(--line)]">Group Events</a>
+      <a href="#faq" class="menu-link py-3">FAQ</a>
+      <a href="https://wa.me/918277292337" target="_blank" rel="noopener noreferrer" class="btn-whatsapp mt-4 justify-center">💬 Chat on WhatsApp</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="max-w-6xl mx-auto px-5 md:px-6 pt-10 pb-20 md:pt-20 md:pb-28 throw-rings">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-center">
+    <div class="md:col-span-7 space-y-6 fade-up">
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="eyebrow">A Calm Collective Space</span>
+        <span class="text-[11px] font-semibold text-[var(--ink-soft)]">📍 North Bangalore</span>
+      </div>
+      <h1 class="text-[2.5rem] leading-[1.1] md:text-6xl md:leading-[1.08] font-display font-light text-[var(--ink)] tracking-tight">
+        Hands in clay,<br><span class="italic font-normal text-[var(--ember)]">mind at peace.</span>
+      </h1>
+      <p class="text-sm md:text-base text-[var(--ink-soft)] max-w-lg leading-relaxed">
+        Mitti is a calm, creative studio dedicated to pottery and tactile art experiences for everyone. Slow down, create with your own hands, and feel the grounding, rewarding process of raw clay transformation.
+      </p>
+      <div class="pt-2 flex flex-wrap gap-4 items-center">
+        <a href="#workshops" class="btn-primary">Explore Experiences ↓</a>
+        <a href="https://maps.app.goo.gl/CSHZicRRCuukH1Nw6" target="_blank" rel="noopener noreferrer" class="btn-outline">📍 Studio Map</a>
+      </div>
+    </div>
+    <div class="md:col-span-5 fade-up">
+      <div class="aspect-[4/5] bg-[var(--card)] rounded-[28px] overflow-hidden shadow-sm border border-[var(--line)] relative group">
+        <img src="hero-pottery.png" alt="Wet clay spinning on a potter's wheel" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#1C1B1A]/45 via-transparent to-transparent flex flex-col justify-end p-7 text-white">
+          <div class="w-10 h-[1px] bg-white/60 mb-3"></div>
+          <p class="font-display italic text-lg tracking-wide mb-1">"Earth & Hands"</p>
+          <p class="text-[10px] uppercase tracking-[0.2em] text-white/80">The Wheel Experience</p>
         </div>
-    </nav>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="max-w-6xl mx-auto px-6 pt-12 pb-24 md:pt-24 md:pb-32">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-            <div class="md:col-span-7 space-y-6">
-                <div class="flex flex-wrap items-center gap-2 text-[11px] tracking-[0.25em] uppercase font-bold text-[#A3704C]">
-                    <span>A Calm Collective Space</span>
-                    <span class="text-gray-300">•</span>
-                    <span class="text-[#1C1B1A]">📍 North Bangalore</span>
-                </div>
-                <h1 class="text-4xl md:text-6xl font-serif font-light text-[#1C1B1A] leading-[1.15] tracking-tight">
-                    Hands in clay, <br><span class="italic font-normal text-[#A3704C]">mind at peace.</span>
-                </h1>
-                <p class="text-sm md:text-base text-[#3A3836] max-w-lg leading-relaxed font-normal">
-                    Mitti is a calm, creative studio dedicated to pottery and tactile art experiences for everyone. We invite you to slow down, create with your own hands, and experience the grounding, rewarding process of raw clay transformation.
-                </p>
-                <div class="pt-4 flex flex-wrap gap-6 items-center">
-                    <a href="#workshops" class="text-xs tracking-[0.15em] uppercase font-bold border-b-2 border-[#1C1B1A] pb-1 hover:text-[#A3704C] hover:border-[#A3704C] transition-all">
-                        Explore Experiences ↓
-                    </a>
-                    <a href="https://maps.app.goo.gl/CSHZicRRCuukH1Nw6" target="_blank" rel="noopener noreferrer" class="text-xs tracking-[0.15em] uppercase font-semibold text-[#3A3836] hover:text-[#1C1B1A] transition-colors flex items-center gap-1.5">
-                        📍 View Location Map
-                    </a>
-                </div>
-            </div>
-            
-            <div class="md:col-span-5">
-                <div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden shadow-sm border border-[#EBE7E0] relative group">
-                    <img src="hero-pottery.png" alt="Wet clay spinning on a potter wheel" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#1C1B1A]/40 via-transparent to-transparent flex flex-col justify-end p-8 text-white transition-opacity duration-300 group-hover:opacity-90">
-                        <div class="w-12 h-[1px] bg-white/60 mb-3"></div>
-                        <p class="font-serif italic text-lg tracking-wide mb-1">“Earth & Hands”</p>
-                        <p class="text-[10px] uppercase tracking-[0.2em] text-white/80 font-normal">The Wheel Experience</p>
-                    </div>
-                </div>
-            </div>
+<div class="throw-divider max-w-6xl mx-auto"></div>
+
+<!-- ABOUT / FOUNDER -->
+<section id="about" class="bg-[var(--paper-deep)]/60 py-20 md:py-24">
+  <div class="max-w-6xl mx-auto px-5 md:px-6">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-center">
+      <div class="md:col-span-5 order-2 md:order-1 fade-up">
+        <div class="aspect-[3/4] max-w-sm mx-auto bg-white rounded-[24px] overflow-hidden shadow-sm border border-[var(--line)] relative group">
+          <img src="Priya_MittiFounder.jpg" alt="Priya — Founder of Mitti Studio" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
         </div>
-    </section>
+      </div>
+      <div class="md:col-span-7 order-1 md:order-2 space-y-5 text-center md:text-left fade-up">
+        <span class="eyebrow justify-center md:justify-start">Studio Leadership</span>
+        <h2 class="text-3xl md:text-4xl font-display font-light tracking-tight text-[var(--ink)]">Guided by Priya</h2>
+        <p class="text-sm md:text-base text-[var(--ink-soft)] leading-relaxed max-w-xl mx-auto md:mx-0">
+          Every throw, trim, and fire at Mitti is thoughtfully structured and personally led by <strong class="text-[var(--ink)] font-semibold">Priya</strong>, a professional artisan potter. Dedicated to making the art of clay accessible to everyone, Priya guides students of all age groups and skill levels — from young toddlers discovering their very first sensory forms to adults mastering utility and balance on the wheel.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section id="about" class="border-t border-b border-[#EBE7E0] bg-[#FAF7F2] py-24">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-                <div class="md:col-span-5 order-2 md:order-1">
-                    <div class="aspect-[3/4] max-w-sm mx-auto bg-white rounded-2xl overflow-hidden shadow-sm border border-[#EBE7E0] relative group">
-                        <img src="Priya_MittiFounder.jpg" alt="Priya — Founder of Mitti Studio" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
-                        <div class="absolute inset-0 border border-inset border-white/20 rounded-2xl pointer-events-none"></div>
-                    </div>
-                </div>
-                <div class="md:col-span-7 order-1 md:order-2 space-y-6 text-center md:text-left">
-                    <div class="space-y-2">
-                        <p class="text-[10px] tracking-[0.2em] uppercase font-bold text-[#8A8681]">Studio Leadership</p>
-                        <h2 class="text-3xl font-serif font-light tracking-tight text-[#1C1B1A]">Guided by Priya</h2>
-                        <div class="w-12 h-[1px] bg-[#A3704C] mx-auto md:mx-0"></div>
-                    </div>
-                    <p class="text-sm md:text-base text-[#3A3836] leading-relaxed font-normal">
-                        Every throw, trim, and fire at Mitti is thoughtfully structured and personally led by <strong>Priya</strong>, a professional artisan potter. Dedicated to making the art of clay accessible to everyone, Priya guides students of all age groups and skill levels—from young toddlers discovering their very first sensory forms to adults mastering utility and balance on the wheel.
-                    </p>
-                </div>
-            </div>
+<!-- STUDIO TOUR -->
+<section id="studio-tour" class="max-w-6xl mx-auto px-5 md:px-6 py-20 md:py-28">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-end mb-10 fade-up">
+    <div class="md:col-span-7 space-y-3">
+      <span class="eyebrow">The Sanctuary</span>
+      <h2 class="text-3xl font-display font-light text-[var(--ink)] tracking-tight">Mitti — The Pottery Studio</h2>
+      <p class="text-sm text-[var(--ink-soft)] max-w-xl leading-relaxed">A thoughtfully curated space designed for creative immersion. Swipe through our studio corners to view our space.</p>
+    </div>
+    <div class="md:col-span-5 text-left md:text-right">
+      <a href="https://maps.app.goo.gl/CSHZicRRCuukH1Nw6" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em] text-[var(--celadon-dark)] hover:text-[var(--ink)] transition-colors border-b-2 border-[var(--celadon)]/40 pb-1 hover:border-[var(--ink)]">
+        📍 View Studio Map & Directions →
+      </a>
+    </div>
+  </div>
+
+  <div class="relative w-full overflow-hidden">
+    <div class="flex overflow-x-auto gap-5 no-scrollbar pb-4 scroll-smooth w-full snap-x snap-mandatory">
+      <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[var(--card)] rounded-2xl overflow-hidden border border-[var(--line)] shadow-sm relative group"><img src="MittiStudio1.jpeg" alt="Studio view 1" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
+      <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[var(--card)] rounded-2xl overflow-hidden border border-[var(--line)] shadow-sm relative group"><img src="MittiStudio2.jpeg" alt="Studio view 2" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
+      <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[var(--card)] rounded-2xl overflow-hidden border border-[var(--line)] shadow-sm relative group"><img src="MittiStudio3.jpeg" alt="Studio view 3" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
+      <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[var(--card)] rounded-2xl overflow-hidden border border-[var(--line)] shadow-sm relative group"><img src="MittiStudio4.jpeg" alt="Studio view 4" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
+      <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[var(--card)] rounded-2xl overflow-hidden border border-[var(--line)] shadow-sm relative group"><img src="MittiStudio5.jpeg" alt="Studio view 5" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
+      <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[var(--card)] rounded-2xl overflow-hidden border border-[var(--line)] shadow-sm relative group"><img src="MittiStudio6.jpeg" alt="Studio view 6" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="throw-divider max-w-6xl mx-auto"></div>
+
+<!-- WORKSHOPS -->
+<section id="workshops" class="max-w-6xl mx-auto px-5 md:px-6 py-20 md:py-24 space-y-14">
+  <div class="flex flex-col md:flex-row justify-between items-baseline gap-3 border-b border-[var(--line)] pb-6 fade-up">
+    <div>
+      <span class="eyebrow mb-2 block w-fit">Curated Journeys</span>
+      <h2 class="text-3xl font-display font-light text-[var(--ink)]">Studio Workshop Experiences</h2>
+    </div>
+    <p class="text-xs text-[var(--ink-soft)] uppercase tracking-widest font-semibold">Intimate Batches • Guided Personally by Priya</p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+    <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div class="space-y-2 card p-5 fade-up">
+        <div class="flex justify-between items-baseline border-b border-[var(--line)] pb-1.5">
+          <h3 class="text-sm font-bold text-[var(--ink)]">One-Time Experience</h3>
+          <span class="text-[9px] text-[var(--celadon-dark)] font-bold uppercase tracking-wider bg-[var(--celadon-tint)] px-2 py-0.5 rounded-full">Ages 3+</span>
         </div>
-    </section>
-
-    <section id="studio-tour" class="max-w-6xl mx-auto px-6 py-24 md:py-32">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-end mb-12">
-            <div class="md:col-span-7 space-y-3">
-                <p class="text-[11px] tracking-[0.25em] uppercase font-bold text-[#A3704C]">The Sanctuary</p>
-                <h2 class="text-3xl font-serif font-light text-[#1C1B1A] tracking-tight">Mitti — The Pottery Studio</h2>
-                <p class="text-sm text-[#3A3836] font-normal max-w-xl leading-relaxed">
-                    A thoughtfully curated space designed for creative immersion. Swipe through our studio corners to view our space.
-                </p>
-            </div>
-            <div class="md:col-span-5 text-left md:text-right">
-                <a href="https://maps.app.goo.gl/CSHZicRRCuukH1Nw6" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em] text-[#A3704C] hover:text-[#1C1B1A] transition-colors border-b-2 border-[#A3704C]/30 pb-1 hover:border-[#1C1B1A]">
-                    📍 View Studio Map & Directions →
-                </a>
-            </div>
+        <p class="text-xs text-[var(--ink-soft)] leading-relaxed">A welcoming single-session introduction to clay. Feel the soothing rhythm of raw earth spinning between your hands and mold your very first ceramic vessel.</p>
+      </div>
+      <div class="space-y-2 card p-5 fade-up">
+        <div class="flex justify-between items-baseline border-b border-[var(--line)] pb-1.5">
+          <h3 class="text-sm font-bold text-[var(--ink)]">Clay Dates for Couples</h3>
+          <span class="text-[9px] text-[var(--ink-soft)] font-semibold tracking-widest uppercase">Private</span>
         </div>
-
-        <div class="relative w-full overflow-hidden">
-            <div class="flex overflow-x-auto gap-6 no-scrollbar pb-4 scroll-smooth w-full snap-x snap-mandatory">
-                <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group"><img src="MittiStudio1.jpeg" alt="View 1" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
-                <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group"><img src="MittiStudio2.jpeg" alt="View 2" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
-                <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group"><img src="MittiStudio3.jpeg" alt="View 3" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
-                <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group"><img src="MittiStudio4.jpeg" alt="View 4" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
-                <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group"><img src="MittiStudio5.jpeg" alt="View 5" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
-                <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0] shadow-sm relative group"><img src="MittiStudio6.jpeg" alt="View 6" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
-            </div>
+        <p class="text-xs text-[var(--ink-soft)] leading-relaxed">An elegant screen-free escape. Share a creative evening, co-create unique custom keepsake mugs, and converse in the peaceful tranquility of our space.</p>
+      </div>
+      <div class="space-y-2 card p-5 fade-up">
+        <div class="flex justify-between items-baseline border-b border-[var(--line)] pb-1.5">
+          <h3 class="text-sm font-bold text-[var(--ink)]">Summer & Holidays</h3>
+          <span class="text-[9px] text-[var(--ink-soft)] font-semibold tracking-widest uppercase">Seasonal</span>
         </div>
-    </section>
-
-    <section id="workshops" class="max-w-6xl mx-auto px-6 py-24 border-t border-[#EBE7E0]/60 space-y-16">
-        <div class="flex flex-col md:flex-row justify-between items-baseline gap-4 border-b border-[#EBE7E0] pb-6">
-            <div>
-                <p class="text-[11px] tracking-[0.25em] uppercase font-bold text-[#A3704C] mb-2">Curated Journeys</p>
-                <h2 class="text-3xl font-serif font-light text-[#1C1B1A]">Studio Workshop Experiences</h2>
-            </div>
-            <p class="text-xs text-[#8A8681] uppercase tracking-widest font-semibold">Intimate Batches • Guided Personally by Priya</p>
+        <p class="text-xs text-[var(--ink-soft)] leading-relaxed">Immersive multi-day holiday intensives. Intentionally engineered to enrich spatial awareness, long-form patience, and structural fine motor coordination.</p>
+      </div>
+      <div class="space-y-2 card p-5 fade-up">
+        <div class="flex justify-between items-baseline border-b border-[var(--line)] pb-1.5">
+          <h3 class="text-sm font-bold text-[var(--ink)]">Make Your Own Gifts</h3>
+          <span class="text-[9px] text-[var(--celadon-dark)] font-bold uppercase tracking-wider bg-[var(--celadon-tint)] px-2 py-0.5 rounded-full">Craft</span>
         </div>
-        
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-10">
-                <div class="space-y-2 bg-[#FAF7F2] p-5 rounded-xl border border-[#EBE7E0]/60 shadow-sm">
-                    <div class="flex justify-between items-baseline border-b border-[#EBE7E0] pb-1.5">
-                        <h3 class="text-sm font-bold text-[#1C1B1A]">One-Time Experience</h3>
-                        <span class="text-[9px] text-[#A3704C] font-bold uppercase tracking-wider bg-white px-2 py-0.5 rounded border">Ages 3+</span>
-                    </div>
-                    <p class="text-xs text-[#3A3836] leading-relaxed">A welcoming single-session introduction to clay. Feel the soothing rhythm of raw earth spinning between your hands and mold your very first ceramic vessel.</p>
-                </div>
-                <div class="space-y-2 bg-[#FAF7F2] p-5 rounded-xl border border-[#EBE7E0]/60 shadow-sm">
-                    <div class="flex justify-between items-baseline border-b border-[#EBE7E0] pb-1.5">
-                        <h3 class="text-sm font-bold text-[#1C1B1A]">Clay Dates for Couples</h3>
-                        <span class="text-[9px] text-[#8A8681] font-semibold tracking-widest uppercase">Private</span>
-                    </div>
-                    <p class="text-xs text-[#3A3836] leading-relaxed">An elegant screen-free escape. Share a creative evening, co-create unique custom keepsake mugs, and converse in the peaceful tranquility of our space.</p>
-                </div>
-                <div class="space-y-2 bg-[#FAF7F2] p-5 rounded-xl border border-[#EBE7E0]/60 shadow-sm">
-                    <div class="flex justify-between items-baseline border-b border-[#EBE7E0] pb-1.5">
-                        <h3 class="text-sm font-bold text-[#1C1B1A]">Summer & Holidays</h3>
-                        <span class="text-[9px] text-[#8A8681] font-semibold tracking-widest uppercase">Seasonal</span>
-                    </div>
-                    <p class="text-xs text-[#3A3836] leading-relaxed">Immersive multi-day holiday intensives. Intentionally engineered to enrich spatial awareness, long-form patience, and structural fine motor coordination.</p>
-                </div>
-                <div class="space-y-2 bg-[#FAF7F2] p-5 rounded-xl border border-[#EBE7E0]/60 shadow-sm">
-                    <div class="flex justify-between items-baseline border-b border-[#EBE7E0] pb-1.5">
-                        <h3 class="text-sm font-bold text-[#1C1B1A]">Make Your Own Gifts</h3>
-                        <span class="text-[9px] text-[#A3704C] font-bold uppercase tracking-wider">Craft</span>
-                    </div>
-                    <p class="text-xs text-[#3A3836] leading-relaxed">Skip ordinary gift items. Learn to craft personalized, long-lasting custom ceramic keepsakes to commemorate important milestones for the people you love.</p>
-                </div>
-                <div class="space-y-2 bg-[#FAF7F2] p-5 rounded-xl border border-[#EBE7E0]/60 shadow-sm">
-                    <div class="flex justify-between items-baseline border-b border-[#EBE7E0] pb-1.5">
-                        <h3 class="text-sm font-bold text-[#1C1B1A]">Lampshades & Bases</h3>
-                        <span class="text-[9px] text-[#8A8681] font-semibold tracking-widest uppercase">Decor</span>
-                    </div>
-                    <p class="text-xs text-[#3A3836] leading-relaxed">A dual craft masterclass. Sculpt a solid, functional ceramic structural lamp base on the wheel, paired with fluid artistic lampshade surface painting.</p>
-                </div>
-                <div class="space-y-2 bg-[#FAF7F2] p-5 rounded-xl border border-[#EBE7E0]/60 shadow-sm">
-                    <div class="flex justify-between items-baseline border-b border-[#EBE7E0] pb-1.5">
-                        <h3 class="text-sm font-bold text-[#1C1B1A]">Bespoke Dining Sets</h3>
-                        <span class="text-[9px] text-[#8A8681] font-bold tracking-widest uppercase">Utility</span>
-                    </div>
-                    <p class="text-xs text-[#3A3836] leading-relaxed">Elevate your homeware. Build a uniform set of bespoke artisan plates, soup bowls, and serving dishes patterned explicitly to match your dining room aesthetics.</p>
-                </div>
-            </div>
-
-            <div class="lg:col-span-5 bg-[#FAF7F2] p-6 rounded-2xl border border-[#EBE7E0] space-y-4">
-                <div class="space-y-1">
-                    <span class="text-[10px] uppercase font-bold tracking-widest text-[#A3704C]">The Makers Gallery</span>
-                    <h4 class="font-serif text-lg text-[#1C1B1A] font-medium">First-Time Student Ceramic Creations</h4>
-                    <p class="text-xs text-[#3A3836] leading-relaxed">View real pottery pieces created, glazed, and finished by first-time students in our studio. All of these beautiful creations were made by beginners of all ages, experiencing pottery for the very first time.</p>
-                </div>
-                
-                <div class="viewport-layer rounded-xl bg-white border border-[#EBE7E0] p-1 shadow-inner no-scrollbar" id="student-viewport">
-                    <div class="marquee-container" id="student-track">
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt1.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt2.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt3.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt4.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt5.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt6.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt7.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt8.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt9.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt10.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt11.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt12.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt13.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt14.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt15.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt16.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt17.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt18.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt19.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt20.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt21.jpeg" class="w-full h-full object-cover"></div></div>
-                        <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[#FAF7F2] rounded-xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiStudentArt22.jpeg" class="w-full h-full object-cover"></div></div>
-                    </div>
-                </div>
-            </div>
+        <p class="text-xs text-[var(--ink-soft)] leading-relaxed">Skip ordinary gift items. Learn to craft personalized, long-lasting custom ceramic keepsakes to commemorate important milestones for the people you love.</p>
+      </div>
+      <div class="space-y-2 card p-5 fade-up">
+        <div class="flex justify-between items-baseline border-b border-[var(--line)] pb-1.5">
+          <h3 class="text-sm font-bold text-[var(--ink)]">Lampshades & Bases</h3>
+          <span class="text-[9px] text-[var(--ink-soft)] font-semibold tracking-widest uppercase">Decor</span>
         </div>
-
-        <div class="bg-[#1C1B1A] rounded-2xl p-8 md:p-12 text-center space-y-4 border border-white/5 shadow-md">
-            <p class="text-[10px] tracking-[0.3em] uppercase font-bold text-[#C58A5F]">Give a Meaningful Gift</p>
-            <h4 class="text-2xl font-serif text-white font-light">Gift Your Loved Ones a Unique Experience of Pottery</h4>
-            <p class="text-xs md:text-sm text-[#A6A39F] max-w-xl mx-auto font-normal leading-relaxed">
-                Move away from conventional physical presents. Reach out to us directly on WhatsApp to arrange a custom creative session for someone special under Priya's expert guidance.
-            </p>
-            <div class="pt-2">
-                <a href="https://wa.me/918277292337?text=Hi%20Priya%2c%20I%20would%20love%20to%20gift%20a%20unique%20pottery%20experience%20to%20someone%20special.%20How%20can%20I%20arrange%20this%20session%3F" target="_blank" rel="noopener noreferrer" class="inline-block bg-[#A3704C] hover:bg-[#8F5F3D] text-white text-[11px] uppercase tracking-widest font-bold px-6 py-3 rounded-md transition-colors">
-                    Gift a Pottery Experience →
-                </a>
-            </div>
+        <p class="text-xs text-[var(--ink-soft)] leading-relaxed">A dual craft masterclass. Sculpt a solid, functional ceramic structural lamp base on the wheel, paired with fluid artistic lampshade surface painting.</p>
+      </div>
+      <div class="space-y-2 card p-5 fade-up">
+        <div class="flex justify-between items-baseline border-b border-[var(--line)] pb-1.5">
+          <h3 class="text-sm font-bold text-[var(--ink)]">Bespoke Dining Sets</h3>
+          <span class="text-[9px] text-[var(--ink-soft)] font-semibold tracking-widest uppercase">Utility</span>
         </div>
-    </section>
-
-    <section id="courses" class="bg-[#FAF7F2] border-t border-b border-[#EBE7E0] py-24">
-        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            <div class="lg:col-span-4 space-y-4">
-                <p class="text-[11px] tracking-[0.25em] uppercase font-bold text-[#A3704C]">Structured Learning</p>
-                <h2 class="text-3xl font-serif font-light text-[#1C1B1A]">Beginner Pottery Course</h2>
-                <p class="text-sm text-[#3A3836] font-normal leading-relaxed">Design patterns created for absolute beginners who want to explore and conquer the fundamentals of pottery through both handbuilding and wheel throwing techniques.</p>
-                <div class="bg-white p-5 rounded-xl border border-[#EBE7E0] inline-block w-full shadow-sm">
-                    <p class="text-xs tracking-wider uppercase font-bold text-[#1C1B1A] mb-1">Course Structure</p>
-                    <p class="text-sm font-bold text-[#A3704C]">⏱️ 10 Sessions • 2 Hours Per Session</p>
-                </div>
-            </div>
-            <div class="lg:col-span-8 bg-white p-8 md:p-10 rounded-2xl border border-[#EBE7E0] shadow-sm space-y-8">
-                <div>
-                    <h4 class="font-serif text-lg text-[#1C1B1A] mb-4 border-b border-[#EBE7E0] pb-2">What You Will Learn</h4>
-                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs md:text-sm text-[#3A3836] font-normal">
-                        <li><span class="text-[#A3704C] font-bold mt-0.5">✦</span> Basic handbuilding foundations</li>
-                        <li><span class="text-[#A3704C] font-bold mt-0.5">✦</span> Clay preparation and wheel centering</li>
-                        <li><span class="text-[#A3704C] font-bold mt-0.5">✦</span> Opening clay and pulling uniform walls</li>
-                        <li><span class="text-[#A3704C] font-bold mt-0.5">✦</span> Forming cups, bowls, plates, and small pots</li>
-                        <li><span class="text-[#A3704C] font-bold mt-0.5">✦</span> Trimming, turning, and refining foot rings</li>
-                        <li><span class="text-[#A3704C] font-bold mt-0.5">✦</span> Introduction to studio glazing techniques</li>
-                        <li class="sm:col-span-2"><span class="text-[#A3704C] font-bold mt-0.5">✦</span> Firing cycle steps: tracking greenware to finished ceramic pieces</li>
-                    </ul>
-                </div>
-                <div class="bg-[#FBF9F6] p-6 rounded-xl border border-[#EBE7E0] text-sm text-[#3A3836] font-normal leading-relaxed">
-                    All premium raw clays, specialized tools, and aprons are completely provided. Your enrollment covers the complete firing and processing cycles for underglazes and glazes for <strong class="text-[#A3704C] font-semibold">up to 5 selected pieces</strong>.
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="kids" class="bg-[#FAF7F2] border-b border-[#EBE7E0] py-24">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center max-w-xl mx-auto space-y-4 mb-16">
-                <p class="text-[11px] tracking-[0.25em] uppercase font-bold text-[#A3704C]">Tactile Growth</p>
-                <h2 class="text-3xl font-serif font-light text-[#1C1B1A]">Kids’ Art Corner & Events</h2>
-                <p class="text-xs text-[#3A3836] font-normal leading-relaxed">Nurturing micro-motor skills, coordination confidence, and immersive creative play through structured art exploration.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-xl border border-[#EBE7E0] space-y-3 shadow-sm">
-                    <span class="text-xs uppercase font-bold tracking-wider text-[#A3704C]">Social Play</span>
-                    <h4 class="font-serif text-lg text-[#1C1B1A]">Kids' Playdates</h4>
-                    <p class="text-xs text-[#3A3836] leading-relaxed font-normal">Delightful, social interactive crafting sessions designed specifically for children's get-togethers and interactive groupings.</p>
-                </div>
-                <div class="bg-white p-8 rounded-xl border border-[#EBE7E0] space-y-3 shadow-sm">
-                    <span class="text-xs uppercase font-bold tracking-wider text-[#A3704C]">Fine Focus</span>
-                    <h4 class="font-serif text-lg text-[#1C1B1A]">Children's Events</h4>
-                    <p class="text-xs text-[#3A3836] leading-relaxed font-normal">Interactive children's milestones centered around real clay assignments, keeping little hands productively molding.</p>
-                </div>
-                <div class="bg-white p-8 rounded-xl border border-[#EBE7E0] space-y-3 shadow-sm">
-                    <span class="text-xs uppercase font-bold tracking-wider text-[#A3704C]">Mediums</span>
-                    <h4 class="font-serif text-lg text-[#1C1B1A]">Hands-On Workshops</h4>
-                    <p class="text-xs text-[#3A3836] leading-relaxed font-normal">Immersive step-by-step guidance exploring tactile textures, vibrant watercolor exploration, and custom texturing techniques.</p>
-                </div>
-            </div>
-
-            <div class="mt-12 flex flex-wrap justify-center gap-2 max-w-md mx-auto">
-                <span class="bg-white border border-[#EBE7E0] px-5 py-2 rounded-full text-xs font-semibold text-[#3A3836] tracking-wide shadow-sm">🏺 Clay Art</span>
-                <span class="bg-white border border-[#EBE7E0] px-5 py-2 rounded-full text-xs font-semibold text-[#3A3836] tracking-wide shadow-sm">🎨 Watercolor Exploration</span>
-            </div>
-        </div>
-    </section>
-
-    <section id="products" class="max-w-6xl mx-auto px-6 py-24 border-b border-[#EBE7E0]">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            
-            <div class="lg:col-span-5 space-y-10">
-                <div class="space-y-3">
-                    <p class="text-[11px] tracking-[0.25em] uppercase font-bold text-[#A3704C]">Handcrafted Collection</p>
-                    <h2 class="text-3xl font-serif font-light text-[#1C1B1A] tracking-tight">Custom Ceramic Creations</h2>
-                    <p class="text-sm text-[#3A3836] font-normal leading-relaxed">
-                        Explore a selected dynamic showcase of premium custom orders and unique stoneware articles created personally by Priya. 
-                        <strong class="text-[#A3704C] block mt-2 font-medium">Have a specific design framework in mind? We accept tailored custom orders to bring your personal concept shapes to life.</strong>
-                    </p>
-                </div>
-
-                <div class="space-y-8 text-xs md:text-sm text-[#3A3836] font-normal leading-relaxed border-t pt-8 border-[#EBE7E0]">
-                    <div class="space-y-2">
-                        <h4 class="font-bold text-[#1C1B1A] font-serif text-base">The Tailored Commission Process</h4>
-                        <p>Every single custom piece commissioned at Mitti follows an intentional, collaborative design workflow path. Priya works with you directly to map out dimensional constraints, utility requirements, and color profiles before clay touches the wheel.</p>
-                    </div>
-                    <div class="space-y-2">
-                        <h4 class="font-bold text-[#1C1B1A] font-serif text-base">Bespoke Structural Frameworks</h4>
-                        <p>Whether you require uniform, signature dining sets explicitly proportioned to match your architectural kitchen tables or complex structural porcelain lamp bases patterned for unique ambient spaces, we accept custom orders of all scopes.</p>
-                    </div>
-                    <div class="space-y-2">
-                        <h4 class="font-bold text-[#1C1B1A] font-serif text-base">Timeline & Studio Firing Cycles</h4>
-                        <p>Because authentic high-end ceramics require unhurried processing thresholds, custom orders typically take 4 to 6 weeks from initial layout sign-off to final glaze firing loops. Quality craft cannot be rushed.</p>
-                    </div>
-                </div>
-
-                <div class="pt-4">
-                    <a href="https://wa.me/918277292337?text=Hi%20Priya%2c%20I%20was%20browsing%20your%20custom%20ceramic%20creations%20lookbook%20and%20have%20an%20idea%20for%20a%20custom%20order.%20I'd%20love%20to%20share%20my%20design%20idea%20with%20you!" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-[#A3704C] hover:bg-[#8F5F3D] text-white text-xs font-bold uppercase tracking-wider px-6 py-4 rounded-xl transition-colors shadow-sm w-full sm:w-auto">
-                        ✨ Discuss a Custom Order
-                    </a>
-                </div>
-            </div>
-
-            <div class="lg:col-span-7 lg:sticky lg:top-28 w-full overflow-hidden viewport-layer rounded-2xl bg-white border border-[#EBE7E0] p-1 shadow-inner no-scrollbar" id="product-viewport">
-                <div class="marquee-container" id="product-track">
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct1.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct2.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct3.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct4.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct5.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct6.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct7.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct8.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct9.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct10.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct11.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct12.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct13.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct14.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct15.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct16.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct17.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct18.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct19.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct20.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct21.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct22.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct23.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct24.jpeg" class="w-full h-full object-cover"></div></div>
-                    <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[#FAF7F2] rounded-2xl overflow-hidden border border-[#EBE7E0]/40 select-none pointer-events-none"><img src="MittiProduct25.jpeg" class="w-full h-full object-cover"></div></div>
-                </div>
-                <div class="absolute bottom-6 right-6 bg-[#1C1B1A]/80 text-white text-[9px] uppercase tracking-widest px-3 py-1.5 rounded border border-white/5 backdrop-blur-sm pointer-events-none font-medium">
-                    Swipe Lookbook ↔
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="custom-sessions" class="max-w-6xl mx-auto px-6 py-24 border-b border-[#EBE7E0]">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
-            <div class="lg:col-span-4 space-y-2">
-                <p class="text-[11px] tracking-[0.25em] uppercase font-bold text-[#A3704C]">Tailored Gatherings</p>
-                <h3 class="text-3xl font-serif font-light text-[#1C1B1A]">Custom Events & Private Sessions</h3>
-            </div>
-            <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-sm text-[#3A3836] font-normal">
-                <div class="border-l border-[#A3704C] pl-4 space-y-1">
-                    <h4 class="font-bold text-[#1C1B1A]">Outdoor & Farm</h4>
-                    <p class="text-xs leading-relaxed">Custom outdoor and farm pottery workshops hosted in open lawns or orchard retreats.</p>
-                </div>
-                <div class="border-l border-[#A3704C] pl-4 space-y-1">
-                    <h4 class="font-bold text-[#1C1B1A]">Group Activities</h4>
-                    <p class="text-xs leading-relaxed">Family gatherings or group activities with pottery and custom creative exercises.</p>
-                </div>
-                <div class="border-l border-[#A3704C] pl-4 space-y-1">
-                    <h4 class="font-bold text-[#1C1B1A]">Pre-Wedding</h4>
-                    <p class="text-xs leading-relaxed">Romantic, pottery-themed photoshoots combining natural lighting with studio craft.</p>
-                </div>
-                <div class="border-l border-[#A3704C] pl-4 space-y-1">
-                    <h4 class="font-bold text-[#1C1B1A]">Curated Programs</h4>
-                    <p class="text-xs leading-relaxed">Bespoke design literacy curricula engineered directly for schools, colleges, and institutions.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="relative w-full">
-            <div class="flex overflow-x-auto gap-6 no-scrollbar pb-6 scroll-smooth w-full">
-                <div class="flex-none w-[290px] xs:w-[328px] sm:w-[48%] lg:w-[31%] snap-center bg-white p-2 rounded-2xl border border-[#EBE7E0] shadow-sm flex justify-center">
-                    <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DWJlZi9j7wt/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; width: 100%;"></blockquote>
-                </div>
-                <div class="flex-none w-[290px] xs:w-[328px] sm:w-[48%] lg:w-[31%] snap-center bg-white p-2 rounded-2xl border border-[#EBE7E0] shadow-sm flex justify-center">
-                    <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DQEfFLYjI-E/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; width: 100%;"></blockquote>
-                </div>
-                <div class="flex-none w-[290px] xs:w-[328px] sm:w-[48%] lg:w-[31%] snap-center bg-white p-2 rounded-2xl border border-[#EBE7E0] shadow-sm flex justify-center">
-                    <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DRwi9yAjySg/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; width: 100%;"></blockquote>
-                </div>
-            </div>
-            <div class="flex justify-center lg:hidden gap-1.5 mt-2 opacity-40">
-                <span class="w-6 h-[2px] bg-[#A3704C]"></span>
-                <span class="w-2 h-[2px] bg-[#5C5A57]"></span>
-                <span class="w-2 h-[2px] bg-[#5C5A57]"></span>
-            </div>
-        </div>
-    </section>
-
-    <section id="faq" class="max-w-3xl mx-auto px-6 py-24">
-        <div class="text-center space-y-2 mb-12">
-            <p class="text-[11px] tracking-[0.25em] uppercase font-bold text-[#A3704C]">Good to Know</p>
-            <h3 class="text-2xl font-serif font-light text-[#1C1B1A]">Studio Guidelines & FAQ</h3>
-        </div>
-        <div class="space-y-4 text-sm text-[#3A3836] font-normal">
-            <div class="bg-white p-6 rounded-xl border border-[#EBE7E0] space-y-2 shadow-sm">
-                <h4 class="font-bold text-[#1C1B1A]">When can I collect my finished pottery?</h4>
-                <p class="leading-relaxed">Handcrafted clay goes through a patient journey—requiring thorough air-drying followed by precise bisque and glaze kiln firings. Your finished earthenware will be ready for collection approximately 3 to 4 weeks after your session.</p>
-            </div>
-            <div class="bg-white p-5 rounded-lg border border-[#EBE7E0] space-y-2 shadow-sm">
-                <h4 class="font-bold text-[#1C1B1A]">What should I wear to a workshop?</h4>
-                <p class="leading-relaxed">Don't worry about the mess—clay is completely water-soluble and washes out easily! We highly recommend wearing comfortable, casual clothes that you don't mind getting a little dusty. Studio aprons are provided.</p>
-            </div>
-            <div class="bg-white p-5 rounded-lg border border-[#EBE7E0] space-y-2 shadow-sm">
-                <h4 class="font-bold text-[#1C1B1A]">What is your booking and cancellation policy?</h4>
-                <p class="leading-relaxed">To preserve the intimate environment of our studio, wheel allocations are strictly limited and reserved exclusively for your scheduled time slot. Sessions can be rescheduled up to 24 hours in advance.</p>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-[#1C1B1A] text-[#A6A39F] pt-20 pb-28 border-t-4 border-[#A3704C]">
-        <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 items-start text-xs font-normal">
-            <div class="space-y-4">
-                <h2 class="text-2xl font-serif text-white tracking-wide">Mitti Studio</h2>
-                <p class="text-gray-500 leading-relaxed max-w-sm">A premium collective studio platform dedicated to clay instruction, structural design, and mixed art media workshops based in North Bangalore.</p>
-            </div>
-            <div class="space-y-3">
-                <h4 class="text-white uppercase tracking-widest font-bold text-[10px] mb-2">Connect Directly</h4>
-                <p class="flex items-center gap-2">📞 <a href="tel:+918277292337" class="hover:text-white transition-colors font-medium text-gray-300">+91 8277292337</a></p>
-                <p class="flex items-center gap-2">✉️ <a href="mailto:mitti.pottery.studio@gmail.com" class="hover:text-white transition-colors">mitti.pottery.studio@gmail.com</a></p>
-                <p class="flex items-center gap-2">📸 <a href="https://www.instagram.com/brush_and_mud/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">@brush_and_mud</a></p>
-            </div>
-            <div class="space-y-3">
-                <h4 class="text-white uppercase tracking-widest font-bold text-[10px]">Studio Coordinates</h4>
-                <p class="text-gray-500">Pre-booking is mandatory to ensure single-wheel allocation.</p>
-                <a href="https://forms.gle/8tmBSaus2SWtknm78" target="_blank" rel="noopener noreferrer" class="inline-block bg-[#A3704C] text-white text-[10px] font-bold uppercase px-4 py-2 rounded-md shadow-sm hover:bg-[#8F5F3D] transition-colors">Submit Enquiry Form</a>
-            </div>
-        </div>
-        <div class="max-w-6xl mx-auto px-6 pt-16 mt-16 border-t border-white/5 flex flex-col sm:flex-row justify-between text-[11px] text-gray-600">
-            <p>© 2026 Mitti Pottery Studio. Built intentionally.</p>
-            <p class="mt-2 sm:mt-0">All studio workshops conducted by Priya.</p>
-        </div>
-    </footer>
-
-    <div class="fixed bottom-0 left-0 right-0 bg-[#FBF9F6]/90 backdrop-blur-md border-t border-[#EBE7E0] z-50 py-3 px-6 shadow-lg">
-        <div class="max-w-xl mx-auto flex gap-4 items-center justify-between">
-            <p class="hidden sm:block text-[11px] font-bold uppercase tracking-widest text-[#5C5A57]">Ready to mold?</p>
-            <div class="flex gap-3 w-full sm:w-auto">
-                <a href="https://wa.me/918277292337?text=Hi%20Mitti%20Studio!%20I'm%20interested%20in%20booking%20a%20pottery%20session%20or%20workshop.%20Could%20you%20share%20details%20on%20current%20availability%3F" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none bg-[#25D366] text-white font-bold px-5 py-2.5 rounded-md text-xs flex items-center justify-center gap-2 shadow-sm">💬 WhatsApp Chat</a>
-                <a href="https://forms.gle/8tmBSaus2SWtknm78" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none bg-[#1C1B1A] text-white font-bold px-5 py-2.5 rounded-md text-xs text-center shadow-sm">📋 Enquiry Form</a>
-            </div>
-        </div>
+        <p class="text-xs text-[var(--ink-soft)] leading-relaxed">Elevate your homeware. Build a uniform set of bespoke artisan plates, soup bowls, and serving dishes patterned explicitly to match your dining room aesthetics.</p>
+      </div>
     </div>
 
-    <script>
-        function setupIndependentInfiniteLoop(trackId, viewportId, isStudent = false) {
-            const track = document.getElementById(trackId);
-            const viewport = document.getElementById(viewportId);
-            if (!track || !viewport) return;
+    <div class="lg:col-span-5 card p-6 space-y-4 fade-up">
+      <div class="space-y-1">
+        <span class="eyebrow">The Makers Gallery</span>
+        <h4 class="font-display text-lg text-[var(--ink)] font-medium">First-Time Student Ceramic Creations</h4>
+        <p class="text-xs text-[var(--ink-soft)] leading-relaxed">Real pottery pieces created, glazed, and finished by first-time students in our studio — beginners of all ages, experiencing pottery for the very first time.</p>
+      </div>
 
-            // Look for missing local images and dynamically inject beautiful studio placeholders for preview testing
-            const images = track.getElementsByTagName('img');
-            Array.from(images).forEach((img, index) => {
-                img.onerror = function() {
-                    // Seeded random nature categories focusing explicitly on natural textures and pottery art
-                    const seedId = isStudent ? (10 + index) : (35 + index);
-                    this.src = `https://picsum.photos/id/${seedId}/500/600`;
-                    this.onerror = null;
-                };
-                // Force triggering fallback loops on empty local file paths
-                if (!img.complete || img.naturalWidth === 0) {
-                    img.src = img.src;
-                }
-            });
+      <div class="viewport-layer rounded-xl bg-white border border-[var(--line)] p-1 shadow-inner no-scrollbar" id="student-viewport">
+        <div class="marquee-container" id="student-track">
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt1.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt2.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt3.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt4.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt5.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt6.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt7.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt8.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt9.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt10.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt11.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt12.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt13.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt14.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt15.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt16.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt17.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt18.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt19.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt20.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt21.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt22.jpeg" class="w-full h-full object-cover"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-            // Clear any previously duplicated nodes safely to prevent layout stack bugs
-            const elements = Array.from(track.children);
-            elements.forEach(card => {
-                if(card.getAttribute('aria-hidden') === 'true') card.remove();
-            });
+  <div class="bg-[var(--ink)] rounded-[28px] p-8 md:p-12 text-center space-y-4 shadow-md fade-up">
+    <span class="eyebrow justify-center text-[#D9B98A]">Give a Meaningful Gift</span>
+    <h4 class="text-2xl font-display text-white font-light">Gift Your Loved Ones a Unique Experience of Pottery</h4>
+    <p class="text-xs md:text-sm text-[#B9B4A9] max-w-xl mx-auto leading-relaxed">
+      Move away from conventional physical presents. Reach out to us directly on WhatsApp to arrange a custom creative session for someone special under Priya's expert guidance.
+    </p>
+    <div class="pt-2">
+      <a href="https://wa.me/918277292337?text=Hi%20Priya%2c%20I%20would%20love%20to%20gift%20a%20unique%20pottery%20experience%20to%20someone%20special.%20How%20can%20I%20arrange%20this%20session%3F" target="_blank" rel="noopener noreferrer" class="inline-block bg-[var(--ember)] hover:bg-[#984c29] text-white text-[11px] uppercase tracking-widest font-bold px-6 py-3.5 rounded-full transition-colors">
+        Gift a Pottery Experience →
+      </a>
+    </div>
+  </div>
+</section>
 
-            // Clean Node Cloner: Duplicate all unique cards programmatically to create mathematical loop foundation
-            const freshElements = Array.from(track.children);
-            freshElements.forEach(card => {
-                const clone = card.cloneNode(true);
-                clone.setAttribute('aria-hidden', 'true');
-                track.appendChild(clone);
-            });
+<div class="throw-divider max-w-6xl mx-auto"></div>
 
-            let scrollOffset = 0;
-            let autoScrollActive = true;
-            let isDragging = false;
-            let startX, currentScrollLeft;
-            const scrollSpeed = 0.5; // Custom slow translation vector constant
+<!-- COURSES -->
+<section id="courses" class="bg-[var(--paper-deep)]/60 py-20 md:py-24">
+  <div class="max-w-6xl mx-auto px-5 md:px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+    <div class="lg:col-span-4 space-y-4 fade-up">
+      <span class="eyebrow">Structured Learning</span>
+      <h2 class="text-3xl font-display font-light text-[var(--ink)]">Beginner Pottery Course</h2>
+      <p class="text-sm text-[var(--ink-soft)] leading-relaxed">Design patterns created for absolute beginners who want to explore and conquer the fundamentals of pottery through both handbuilding and wheel throwing techniques.</p>
+      <div class="card p-5">
+        <p class="text-xs tracking-wider uppercase font-bold text-[var(--ink)] mb-1">Course Structure</p>
+        <p class="text-sm font-bold text-[var(--celadon-dark)]">⏱️ 10 Sessions • 2 Hours Per Session</p>
+      </div>
+    </div>
+    <div class="lg:col-span-8 card p-7 md:p-10 space-y-8 fade-up">
+      <div>
+        <h4 class="font-display text-lg text-[var(--ink)] mb-4 border-b border-[var(--line)] pb-2">What You Will Learn</h4>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs md:text-sm text-[var(--ink-soft)]">
+          <li class="flex gap-2"><span class="text-[var(--celadon-dark)] font-bold">✦</span> Basic handbuilding foundations</li>
+          <li class="flex gap-2"><span class="text-[var(--celadon-dark)] font-bold">✦</span> Clay preparation and wheel centering</li>
+          <li class="flex gap-2"><span class="text-[var(--celadon-dark)] font-bold">✦</span> Opening clay and pulling uniform walls</li>
+          <li class="flex gap-2"><span class="text-[var(--celadon-dark)] font-bold">✦</span> Forming cups, bowls, plates, and small pots</li>
+          <li class="flex gap-2"><span class="text-[var(--celadon-dark)] font-bold">✦</span> Trimming, turning, and refining foot rings</li>
+          <li class="flex gap-2"><span class="text-[var(--celadon-dark)] font-bold">✦</span> Introduction to studio glazing techniques</li>
+          <li class="sm:col-span-2 flex gap-2"><span class="text-[var(--celadon-dark)] font-bold">✦</span> Firing cycle steps: tracking greenware to finished ceramic pieces</li>
+        </ul>
+      </div>
+      <div class="bg-[var(--paper)] p-6 rounded-2xl border border-[var(--line)] text-sm text-[var(--ink-soft)] leading-relaxed">
+        All premium raw clays, specialized tools, and aprons are completely provided. Your enrollment covers the complete firing and processing cycles for underglazes and glazes for <strong class="text-[var(--ember)] font-semibold">up to 5 selected pieces</strong>.
+      </div>
+    </div>
+  </div>
+</section>
 
-            // High-Performance GPU-Accelerated CSS Translate Transition Matrix frame loop
-            function animateLoop() {
-                if (autoScrollActive && !isDragging) {
-                    scrollOffset += scrollSpeed;
-                    
-                    // Crucial Reset Math: When we reach the exact halfway point of the duplicated structure...
-                    if (scrollOffset >= track.scrollWidth / 2) {
-                        scrollOffset = 0; // ...Instantly snap back to start. The browser detects identical nodes and hides the reset.
-                    }
-                    
-                    // Standard GPU Transform translation matrix application
-                    track.style.transform = `translateX(${-scrollOffset}px)`;
-                }
-                requestAnimationFrame(animateLoop);
-            }
-            requestAnimationFrame(animateLoop);
+<!-- KIDS -->
+<section id="kids" class="bg-[var(--paper-deep)]/60 py-20 md:py-24 border-t border-[var(--line)]">
+  <div class="max-w-6xl mx-auto px-5 md:px-6">
+    <div class="text-center max-w-xl mx-auto space-y-3 mb-14 fade-up">
+      <span class="eyebrow justify-center">Tactile Growth</span>
+      <h2 class="text-3xl font-display font-light text-[var(--ink)]">Kids' Art Corner & Events</h2>
+      <p class="text-xs text-[var(--ink-soft)] leading-relaxed">Nurturing micro-motor skills, coordination confidence, and immersive creative play through structured art exploration.</p>
+    </div>
 
-            // Desktop Mouse Drag interaction gesture mappings cleanly isolated to targets
-            viewport.addEventListener('mousedown', (e) => {
-                isDragging = true;
-                autoScrollActive = false;
-                startX = e.pageX;
-                const matrix = new WebKitCSSMatrix(window.getComputedStyle(track).transform);
-                currentScrollLeft = matrix.m41;
-                viewport.classList.add('cursor-grabbing');
-            });
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="card p-8 space-y-3 fade-up">
+        <span class="text-xs uppercase font-bold tracking-wider text-[var(--celadon-dark)]">Social Play</span>
+        <h4 class="font-display text-lg text-[var(--ink)]">Kids' Playdates</h4>
+        <p class="text-xs text-[var(--ink-soft)] leading-relaxed">Delightful, social interactive crafting sessions designed specifically for children's get-togethers and interactive groupings.</p>
+      </div>
+      <div class="card p-8 space-y-3 fade-up">
+        <span class="text-xs uppercase font-bold tracking-wider text-[var(--celadon-dark)]">Fine Focus</span>
+        <h4 class="font-display text-lg text-[var(--ink)]">Children's Events</h4>
+        <p class="text-xs text-[var(--ink-soft)] leading-relaxed">Interactive children's milestones centered around real clay assignments, keeping little hands productively molding.</p>
+      </div>
+      <div class="card p-8 space-y-3 fade-up">
+        <span class="text-xs uppercase font-bold tracking-wider text-[var(--celadon-dark)]">Mediums</span>
+        <h4 class="font-display text-lg text-[var(--ink)]">Hands-On Workshops</h4>
+        <p class="text-xs text-[var(--ink-soft)] leading-relaxed">Immersive step-by-step guidance exploring tactile textures, vibrant watercolor exploration, and custom texturing techniques.</p>
+      </div>
+    </div>
 
-            viewport.addEventListener('mouseleave', () => { 
-                if (!isDragging) return;
-                isDragging = false;
-                autoScrollActive = true;
-                viewport.classList.remove('cursor-grabbing');
-            });
+    <div class="mt-10 flex flex-wrap justify-center gap-2 max-w-md mx-auto">
+      <span class="bg-[var(--card)] border border-[var(--line)] px-5 py-2 rounded-full text-xs font-semibold text-[var(--ink-soft)] tracking-wide shadow-sm">🏺 Clay Art</span>
+      <span class="bg-[var(--card)] border border-[var(--line)] px-5 py-2 rounded-full text-xs font-semibold text-[var(--ink-soft)] tracking-wide shadow-sm">🎨 Watercolor Exploration</span>
+    </div>
+  </div>
+</section>
 
-            viewport.addEventListener('mouseup', () => { 
-                if (!isDragging) return;
-                isDragging = false;
-                autoScrollActive = true;
-                viewport.classList.remove('cursor-grabbing');
-            });
+<div class="throw-divider max-w-6xl mx-auto"></div>
 
-            viewport.addEventListener('mousemove', (e) => {
-                if (!isDragging) return;
-                e.preventDefault();
-                const x = e.pageX;
-                const walk = (x - startX) * 1.5; // Drag Precision multiplier
-                
-                let newTranslation = currentScrollLeft + walk;
-                
-                if (newTranslation > 0) {
-                    newTranslation = -track.scrollWidth / 2;
-                } else if (Math.abs(newTranslation) >= track.scrollWidth / 2) {
-                    newTranslation = 0;
-                }
-                
-                scrollOffset = Math.abs(newTranslation);
-                track.style.transform = `translateX(${newTranslation}px)`;
-            });
+<!-- PRODUCTS / CUSTOM ORDERS -->
+<section id="products" class="max-w-6xl mx-auto px-5 md:px-6 py-20 md:py-24">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
 
-            // Mobile-Isolated Touch interaction gesture mappings for cohesive cross-platform UX
-            viewport.addEventListener('touchstart', (e) => { 
-                autoScrollActive = false;
-                isDragging = true;
-                startX = e.touches[0].pageX;
-                const matrix = new WebKitCSSMatrix(window.getComputedStyle(track).transform);
-                currentScrollLeft = matrix.m41;
-            }, { passive: true });
-            
-            viewport.addEventListener('touchend', () => { 
-                autoScrollActive = true; 
-                isDragging = false;
-            }, { passive: true });
+    <div class="lg:col-span-5 space-y-9 fade-up">
+      <div class="space-y-3">
+        <span class="eyebrow">Handcrafted Collection</span>
+        <h2 class="text-3xl font-display font-light text-[var(--ink)] tracking-tight">Custom Ceramic Creations</h2>
+        <p class="text-sm text-[var(--ink-soft)] leading-relaxed">
+          Explore a selected dynamic showcase of premium custom orders and unique stoneware articles created personally by Priya.
+          <strong class="text-[var(--ember)] block mt-2 font-medium">Have a specific design in mind? We accept tailored custom orders to bring your personal concept to life.</strong>
+        </p>
+      </div>
 
-            viewport.addEventListener('touchmove', (e) => {
-                if (!isDragging) return;
-                const x = e.touches[0].pageX;
-                const walk = (x - startX) * 1.4;
+      <div class="space-y-7 text-xs md:text-sm text-[var(--ink-soft)] leading-relaxed border-t pt-8 border-[var(--line)]">
+        <div class="space-y-2">
+          <h4 class="font-bold text-[var(--ink)] font-display text-base">The Tailored Commission Process</h4>
+          <p>Every custom piece commissioned at Mitti follows an intentional, collaborative design workflow. Priya works with you directly to map out dimensions, utility requirements, and color profiles before clay touches the wheel.</p>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-[var(--ink)] font-display text-base">Bespoke Structural Frameworks</h4>
+          <p>Whether you need a uniform dining set proportioned to your table or a structural porcelain lamp base for a unique space, we accept custom orders of all scopes.</p>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-[var(--ink)] font-display text-base">Timeline & Studio Firing Cycles</h4>
+          <p>Because authentic high-end ceramics require unhurried processing, custom orders typically take 4 to 6 weeks from initial layout sign-off to final glaze firing. Quality craft cannot be rushed.</p>
+        </div>
+      </div>
 
-                let newTranslation = currentScrollLeft + walk;
-                
-                if (newTranslation > 0) {
-                    newTranslation = -track.scrollWidth / 2;
-                } else if (Math.abs(newTranslation) >= track.scrollWidth / 2) {
-                    newTranslation = 0;
-                }
-                
-                scrollOffset = Math.abs(newTranslation);
-                track.style.transform = `translateX(${newTranslation}px)`;
-            }, { passive: true });
-        }
+      <div class="pt-2">
+        <a href="https://wa.me/918277292337?text=Hi%20Priya%2c%20I%20was%20browsing%20your%20custom%20ceramic%20creations%20lookbook%20and%20have%20an%20idea%20for%20a%20custom%20order.%20I'd%20love%20to%20share%20my%20design%20idea%20with%20you!" target="_blank" rel="noopener noreferrer" class="btn-primary w-full sm:w-auto">
+          ✨ Discuss a Custom Order
+        </a>
+      </div>
+    </div>
 
-        // Initialize separated track targets - both move forward infinitely and accept all manual inputs seamlessly.
-        setupIndependentInfiniteLoop('product-track', 'product-viewport', false);
-        setupIndependentInfiniteLoop('student-track', 'student-viewport', true);
-    </script>
+    <div class="lg:col-span-7 lg:sticky lg:top-28 w-full overflow-hidden viewport-layer rounded-[24px] bg-[var(--card)] border border-[var(--line)] p-1 shadow-inner no-scrollbar fade-up" id="product-viewport">
+      <div class="marquee-container" id="product-track">
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct1.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct2.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct3.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct4.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct5.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct6.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct7.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct8.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct9.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct10.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct11.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct12.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct13.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct14.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct15.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct16.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct17.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct18.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct19.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct20.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct21.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct22.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct23.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct24.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct25.jpeg" class="w-full h-full object-cover"></div></div>
+      </div>
+      <div class="absolute bottom-6 right-6 bg-[var(--ink)]/85 text-white text-[9px] uppercase tracking-widest px-3 py-1.5 rounded-full backdrop-blur-sm pointer-events-none font-medium">
+        Swipe Lookbook ↔
+      </div>
+    </div>
 
-    <script async src="https://www.instagram.com/embed.js"></script>
+  </div>
+</section>
+
+<div class="throw-divider max-w-6xl mx-auto"></div>
+
+<!-- CUSTOM SESSIONS -->
+<section id="custom-sessions" class="max-w-6xl mx-auto px-5 md:px-6 py-20 md:py-24">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-14 fade-up">
+    <div class="lg:col-span-4 space-y-2">
+      <span class="eyebrow">Tailored Gatherings</span>
+      <h3 class="text-3xl font-display font-light text-[var(--ink)]">Custom Events & Private Sessions</h3>
+    </div>
+    <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-sm text-[var(--ink-soft)]">
+      <div class="border-l-2 border-[var(--ember)] pl-4 space-y-1">
+        <h4 class="font-bold text-[var(--ink)]">Outdoor & Farm</h4>
+        <p class="text-xs leading-relaxed">Custom outdoor and farm pottery workshops hosted in open lawns or orchard retreats.</p>
+      </div>
+      <div class="border-l-2 border-[var(--ember)] pl-4 space-y-1">
+        <h4 class="font-bold text-[var(--ink)]">Group Activities</h4>
+        <p class="text-xs leading-relaxed">Family gatherings or group activities with pottery and custom creative exercises.</p>
+      </div>
+      <div class="border-l-2 border-[var(--ember)] pl-4 space-y-1">
+        <h4 class="font-bold text-[var(--ink)]">Pre-Wedding</h4>
+        <p class="text-xs leading-relaxed">Romantic, pottery-themed photoshoots combining natural lighting with studio craft.</p>
+      </div>
+      <div class="border-l-2 border-[var(--ember)] pl-4 space-y-1">
+        <h4 class="font-bold text-[var(--ink)]">Curated Programs</h4>
+        <p class="text-xs leading-relaxed">Bespoke design literacy curricula engineered directly for schools, colleges, and institutions.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="relative w-full fade-up">
+    <div class="flex overflow-x-auto gap-6 no-scrollbar pb-6 scroll-smooth w-full">
+      <div class="flex-none w-[290px] xs:w-[328px] sm:w-[48%] lg:w-[31%] snap-center card p-2 flex justify-center">
+        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DWJlZi9j7wt/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; width: 100%;"></blockquote>
+      </div>
+      <div class="flex-none w-[290px] xs:w-[328px] sm:w-[48%] lg:w-[31%] snap-center card p-2 flex justify-center">
+        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DQEfFLYjI-E/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; width: 100%;"></blockquote>
+      </div>
+      <div class="flex-none w-[290px] xs:w-[328px] sm:w-[48%] lg:w-[31%] snap-center card p-2 flex justify-center">
+        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DRwi9yAjySg/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; width: 100%;"></blockquote>
+      </div>
+    </div>
+    <div class="flex justify-center lg:hidden gap-1.5 mt-2 opacity-40">
+      <span class="w-6 h-[2px] bg-[var(--ember)]"></span>
+      <span class="w-2 h-[2px] bg-[var(--ink-soft)]"></span>
+      <span class="w-2 h-[2px] bg-[var(--ink-soft)]"></span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="max-w-3xl mx-auto px-5 md:px-6 py-20 md:py-24">
+  <div class="text-center space-y-2 mb-10 fade-up">
+    <span class="eyebrow justify-center">Good to Know</span>
+    <h3 class="text-2xl font-display font-light text-[var(--ink)]">Studio Guidelines & FAQ</h3>
+  </div>
+  <div class="space-y-4 text-sm text-[var(--ink-soft)] fade-up">
+    <details class="card p-6 group" open>
+      <summary class="font-bold text-[var(--ink)] cursor-pointer list-none flex justify-between items-center gap-4">
+        When can I collect my finished pottery?
+        <span class="text-[var(--celadon-dark)] shrink-0 transition-transform group-open:rotate-45 text-lg">+</span>
+      </summary>
+      <p class="leading-relaxed mt-3">Handcrafted clay goes through a patient journey — requiring thorough air-drying followed by precise bisque and glaze kiln firings. Your finished earthenware will be ready for collection approximately 3 to 4 weeks after your session.</p>
+    </details>
+    <details class="card p-6 group">
+      <summary class="font-bold text-[var(--ink)] cursor-pointer list-none flex justify-between items-center gap-4">
+        What should I wear to a workshop?
+        <span class="text-[var(--celadon-dark)] shrink-0 transition-transform group-open:rotate-45 text-lg">+</span>
+      </summary>
+      <p class="leading-relaxed mt-3">Don't worry about the mess — clay is completely water-soluble and washes out easily! We highly recommend wearing comfortable, casual clothes that you don't mind getting a little dusty. Studio aprons are provided.</p>
+    </details>
+    <details class="card p-6 group">
+      <summary class="font-bold text-[var(--ink)] cursor-pointer list-none flex justify-between items-center gap-4">
+        What is your booking and cancellation policy?
+        <span class="text-[var(--celadon-dark)] shrink-0 transition-transform group-open:rotate-45 text-lg">+</span>
+      </summary>
+      <p class="leading-relaxed mt-3">To preserve the intimate environment of our studio, wheel allocations are strictly limited and reserved exclusively for your scheduled time slot. Sessions can be rescheduled up to 24 hours in advance.</p>
+    </details>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-[var(--ink)] text-[#B9B4A9] pt-16 pb-28 border-t-4 border-[var(--ember)]">
+  <div class="max-w-6xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-3 gap-10 items-start text-xs">
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display text-white tracking-wide">Mitti Studio</h2>
+      <p class="text-gray-500 leading-relaxed max-w-sm">A premium collective studio platform dedicated to clay instruction, structural design, and mixed art media workshops based in North Bangalore.</p>
+    </div>
+    <div class="space-y-3">
+      <h4 class="text-white uppercase tracking-widest font-bold text-[10px] mb-2">Connect Directly</h4>
+      <p class="flex items-center gap-2">📞 <a href="tel:+918277292337" class="hover:text-white transition-colors font-medium text-gray-300">+91 8277292337</a></p>
+      <p class="flex items-center gap-2">✉️ <a href="mailto:mitti.pottery.studio@gmail.com" class="hover:text-white transition-colors">mitti.pottery.studio@gmail.com</a></p>
+      <p class="flex items-center gap-2">📸 <a href="https://www.instagram.com/brush_and_mud/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">@brush_and_mud</a></p>
+    </div>
+    <div class="space-y-3">
+      <h4 class="text-white uppercase tracking-widest font-bold text-[10px]">Studio Coordinates</h4>
+      <p class="text-gray-500">Pre-booking is mandatory to ensure single-wheel allocation.</p>
+      <a href="https://forms.gle/8tmBSaus2SWtknm78" target="_blank" rel="noopener noreferrer" class="inline-block bg-[var(--ember)] text-white text-[10px] font-bold uppercase px-4 py-2.5 rounded-full shadow-sm hover:bg-[#984c29] transition-colors">Submit Enquiry Form</a>
+    </div>
+  </div>
+  <div class="max-w-6xl mx-auto px-5 md:px-6 pt-12 mt-12 border-t border-white/10 flex flex-col sm:flex-row justify-between text-[11px] text-gray-600">
+    <p>© 2026 Mitti Pottery Studio. Built intentionally.</p>
+    <p class="mt-2 sm:mt-0">All studio workshops conducted by Priya.</p>
+  </div>
+</footer>
+
+<!-- STICKY MOBILE CTA -->
+<div class="fixed bottom-0 left-0 right-0 bg-[var(--paper)]/95 backdrop-blur-md border-t border-[var(--line)] z-50 py-3 px-5 shadow-lg">
+  <div class="max-w-xl mx-auto flex gap-3 items-center justify-between">
+    <p class="hidden sm:block text-[11px] font-bold uppercase tracking-widest text-[var(--ink-soft)]">Ready to mold?</p>
+    <div class="flex gap-3 w-full sm:w-auto">
+      <a href="https://wa.me/918277292337?text=Hi%20Mitti%20Studio!%20I'm%20interested%20in%20booking%20a%20pottery%20session%20or%20workshop.%20Could%20you%20share%20details%20on%20current%20availability%3F" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none btn-whatsapp">💬 WhatsApp Chat</a>
+      <a href="https://forms.gle/8tmBSaus2SWtknm78" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none btn-primary">📋 Enquiry Form</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // mobile menu
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  function closeMenu(){ menuToggle.classList.remove('open'); mobileMenu.classList.remove('open'); menuToggle.setAttribute('aria-expanded','false'); }
+  menuToggle.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    menuToggle.classList.toggle('open', open);
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.querySelectorAll('#mobile-menu a').forEach(a => a.addEventListener('click', closeMenu));
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.fade-up');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  function setupIndependentInfiniteLoop(trackId, viewportId, isStudent = false) {
+      const track = document.getElementById(trackId);
+      const viewport = document.getElementById(viewportId);
+      if (!track || !viewport) return;
+
+      const images = track.getElementsByTagName('img');
+      Array.from(images).forEach((img, index) => {
+          img.onerror = function() {
+              const seedId = isStudent ? (10 + index) : (35 + index);
+              this.src = `https://picsum.photos/id/${seedId}/500/600`;
+              this.onerror = null;
+          };
+          if (!img.complete || img.naturalWidth === 0) { img.src = img.src; }
+      });
+
+      const elements = Array.from(track.children);
+      elements.forEach(card => { if (card.getAttribute('aria-hidden') === 'true') card.remove(); });
+
+      const freshElements = Array.from(track.children);
+      freshElements.forEach(card => {
+          const clone = card.cloneNode(true);
+          clone.setAttribute('aria-hidden', 'true');
+          track.appendChild(clone);
+      });
+
+      let scrollOffset = 0;
+      let autoScrollActive = true;
+      let isDragging = false;
+      let startX, currentScrollLeft;
+      const scrollSpeed = 0.5;
+
+      function animateLoop() {
+          if (autoScrollActive && !isDragging) {
+              scrollOffset += scrollSpeed;
+              if (scrollOffset >= track.scrollWidth / 2) { scrollOffset = 0; }
+              track.style.transform = `translateX(${-scrollOffset}px)`;
+          }
+          requestAnimationFrame(animateLoop);
+      }
+      requestAnimationFrame(animateLoop);
+
+      viewport.addEventListener('mousedown', (e) => {
+          isDragging = true; autoScrollActive = false; startX = e.pageX;
+          const matrix = new WebKitCSSMatrix(window.getComputedStyle(track).transform);
+          currentScrollLeft = matrix.m41;
+          viewport.classList.add('cursor-grabbing');
+      });
+      viewport.addEventListener('mouseleave', () => { if (!isDragging) return; isDragging = false; autoScrollActive = true; viewport.classList.remove('cursor-grabbing'); });
+      viewport.addEventListener('mouseup', () => { if (!isDragging) return; isDragging = false; autoScrollActive = true; viewport.classList.remove('cursor-grabbing'); });
+      viewport.addEventListener('mousemove', (e) => {
+          if (!isDragging) return;
+          e.preventDefault();
+          const walk = (e.pageX - startX) * 1.5;
+          let newTranslation = currentScrollLeft + walk;
+          if (newTranslation > 0) { newTranslation = -track.scrollWidth / 2; }
+          else if (Math.abs(newTranslation) >= track.scrollWidth / 2) { newTranslation = 0; }
+          scrollOffset = Math.abs(newTranslation);
+          track.style.transform = `translateX(${newTranslation}px)`;
+      });
+
+      viewport.addEventListener('touchstart', (e) => {
+          autoScrollActive = false; isDragging = true; startX = e.touches[0].pageX;
+          const matrix = new WebKitCSSMatrix(window.getComputedStyle(track).transform);
+          currentScrollLeft = matrix.m41;
+      }, { passive: true });
+      viewport.addEventListener('touchend', () => { autoScrollActive = true; isDragging = false; }, { passive: true });
+      viewport.addEventListener('touchmove', (e) => {
+          if (!isDragging) return;
+          const walk = (e.touches[0].pageX - startX) * 1.4;
+          let newTranslation = currentScrollLeft + walk;
+          if (newTranslation > 0) { newTranslation = -track.scrollWidth / 2; }
+          else if (Math.abs(newTranslation) >= track.scrollWidth / 2) { newTranslation = 0; }
+          scrollOffset = Math.abs(newTranslation);
+          track.style.transform = `translateX(${newTranslation}px)`;
+      }, { passive: true });
+  }
+
+  setupIndependentInfiniteLoop('product-track', 'product-viewport', false);
+  setupIndependentInfiniteLoop('student-track', 'student-viewport', true);
+</script>
+
+<script async src="https://www.instagram.com/embed.js"></script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mitti — The Pottery Studio</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2A2622;
+    --ink-soft:#5C564D;
+    --paper:#F3EDE2;
+    --paper-deep:#EAE1D0;
+    --card:#FFFCF6;
+    --line: rgba(42,38,34,0.12);
+    --celadon:#6E8570;
+    --celadon-dark:#516155;
+    --celadon-tint:#E4E9DF;
+    --ember:#AE5A32;
+    --ember-tint:#F1DDCB;
+    --gold:#B08B4F;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif; background:var(--paper); color:var(--ink);}
+  .font-display{font-family:'Fraunces',serif; font-optical-sizing:auto;}
+  .no-scrollbar::-webkit-scrollbar{display:none;}
+  .no-scrollbar{-ms-overflow-style:none; scrollbar-width:none;}
+
+  /* throw-rings — the signature motif: concentric grooves like a finger drawn across a wheel-thrown pot */
+  .throw-rings{
+    background-image: repeating-radial-gradient(circle at 12% 30%, transparent 0, transparent 26px, var(--line) 27px, transparent 28px);
+    background-size: 340px 340px;
+    background-repeat: no-repeat;
+  }
+  .throw-divider{
+    height: 34px;
+    background-image: repeating-linear-gradient(180deg, transparent 0 3px, var(--line) 3px 4px);
+    background-size: 100% 34px;
+    opacity: .55;
+    mask-image: linear-gradient(90deg, transparent, black 15%, black 85%, transparent);
+  }
+  .eyebrow{
+    font-size: 11px; letter-spacing: .22em; text-transform: uppercase; font-weight:700;
+    color: var(--celadon-dark);
+    display:inline-flex; align-items:center; gap:8px;
+  }
+  .eyebrow::before{
+    content:''; width:16px; height:16px; border-radius:50%;
+    border: 2px solid currentColor; border-top-color: transparent;
+  }
+  .btn-primary{
+    background: var(--ink); color: #fff; font-weight:600; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    padding: 14px 26px; border-radius: 999px; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    transition: transform .25s ease, background .25s ease;
+  }
+  .btn-primary:hover{ background: var(--celadon-dark); transform: translateY(-1px); }
+  .btn-outline{
+    border:1.5px solid var(--ink); color: var(--ink); font-weight:600; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    padding: 13px 26px; border-radius: 999px; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    transition: all .25s ease;
+  }
+  .btn-outline:hover{ background: var(--ink); color:#fff; }
+  .btn-whatsapp{
+    background:#3F7A54; color:#fff; font-weight:700; font-size:12px; letter-spacing:.05em;
+    padding: 13px 20px; border-radius: 999px; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    transition: transform .2s ease, background .2s ease;
+  }
+  .btn-whatsapp:hover{ background:#356b48; transform: translateY(-1px); }
+
+  .card{ background: var(--card); border:1px solid var(--line); border-radius: 20px; }
+
+  .marquee-container{ display:flex; gap:16px; width:max-content; cursor:grab; -webkit-user-select:none; user-select:none; }
+  .marquee-container:active{ cursor:grabbing; }
+  .viewport-layer{ position:relative; width:100%; overflow:hidden; touch-action: pan-y; }
+
+  /* mobile menu */
+  #mobile-menu{ transform: translateY(-8px); opacity:0; pointer-events:none; transition: all .28s ease; }
+  #mobile-menu.open{ transform: translateY(0); opacity:1; pointer-events:auto; }
+  .menu-line{ display:block; width:22px; height:2px; background: var(--ink); transition: all .25s ease; }
+  #menu-toggle.open .menu-line:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+  #menu-toggle.open .menu-line:nth-child(2){ opacity:0; }
+  #menu-toggle.open .menu-line:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+
+  .fade-up{ opacity:0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+  .fade-up.in{ opacity:1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    .fade-up{ opacity:1; transform:none; transition:none; }
+  }
+</style>
+</head>
+<body class="antialiased selection:bg-[#6E8570]/20 selection:text-[#2A2622]">
+
+<div class="h-1.5 bg-gradient-to-r from-[#AE5A32] via-[#B08B4F] to-[#6E8570]"></div>
+
+<!-- NAV -->
+<nav class="sticky top-0 bg-[#F3EDE2]/90 backdrop-blur-md border-b border-[var(--line)] z-40">
+  <div class="max-w-6xl mx-auto px-5 md:px-6 py-3 md:py-4 flex justify-between items-center">
+    <a href="#" class="transition-opacity hover:opacity-80 block shrink-0">
+      <img src="MittiLogo-cropped.png" alt="Mitti Logo" class="h-16 sm:h-20 md:h-24 w-auto object-contain object-left">
+    </a>
+    <div class="hidden lg:flex space-x-8 text-[11px] tracking-[0.18em] uppercase font-semibold text-[var(--ink-soft)]">
+      <a href="#about" class="hover:text-[var(--celadon-dark)] transition-colors">The Studio</a>
+      <a href="#studio-tour" class="hover:text-[var(--celadon-dark)] transition-colors">Studio Tour</a>
+      <a href="#workshops" class="hover:text-[var(--celadon-dark)] transition-colors">Workshops</a>
+      <a href="#courses" class="hover:text-[var(--celadon-dark)] transition-colors">Beginner Course</a>
+      <a href="#kids" class="hover:text-[var(--celadon-dark)] transition-colors">Kids' Corner</a>
+      <a href="#products" class="hover:text-[var(--celadon-dark)] transition-colors">Custom Orders</a>
+      <a href="#custom-sessions" class="hover:text-[var(--celadon-dark)] transition-colors">Group Events</a>
+      <a href="#faq" class="hover:text-[var(--celadon-dark)] transition-colors">FAQ</a>
+    </div>
+    <a href="https://wa.me/918277292337" target="_blank" rel="noopener noreferrer" class="hidden lg:inline-flex btn-whatsapp">💬 WhatsApp</a>
+    <button id="menu-toggle" class="lg:hidden flex flex-col gap-[6px] p-2 -mr-2" aria-label="Toggle menu" aria-expanded="false">
+      <span class="menu-line"></span><span class="menu-line"></span><span class="menu-line"></span>
+    </button>
+  </div>
+  <div id="mobile-menu" class="lg:hidden absolute left-0 right-0 bg-[#F3EDE2] border-b border-[var(--line)] shadow-lg">
+    <div class="max-w-6xl mx-auto px-6 py-6 flex flex-col gap-1 text-sm font-semibold text-[var(--ink)]">
+      <a href="#about" class="menu-link py-3 border-b border-[var(--line)]">The Studio</a>
+      <a href="#studio-tour" class="menu-link py-3 border-b border-[var(--line)]">Studio Tour</a>
+      <a href="#workshops" class="menu-link py-3 border-b border-[var(--line)]">Workshops</a>
+      <a href="#courses" class="menu-link py-3 border-b border-[var(--line)]">Beginner Course</a>
+      <a href="#kids" class="menu-link py-3 border-b border-[var(--line)]">Kids' Corner</a>
+      <a href="#products" class="menu-link py-3 border-b border-[var(--line)]">Custom Orders</a>
+      <a href="#custom-sessions" class="menu-link py-3 border-b border-[var(--line)]">Group Events</a>
+      <a href="#faq" class="menu-link py-3">FAQ</a>
+      <a href="https://wa.me/918277292337" target="_blank" rel="noopener noreferrer" class="btn-whatsapp mt-4 justify-center">💬 Chat on WhatsApp</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="max-w-6xl mx-auto px-5 md:px-6 pt-10 pb-20 md:pt-20 md:pb-28 throw-rings">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-center">
+    <div class="md:col-span-7 space-y-6 fade-up">
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="eyebrow">A Calm Collective Space</span>
+        <span class="text-[11px] font-semibold text-[var(--ink-soft)]">📍 North Bangalore</span>
+      </div>
+      <h1 class="text-[2.5rem] leading-[1.1] md:text-6xl md:leading-[1.08] font-display font-light text-[var(--ink)] tracking-tight">
+        Hands in clay,<br><span class="italic font-normal text-[var(--ember)]">mind at peace.</span>
+      </h1>
+      <p class="text-sm md:text-base text-[var(--ink-soft)] max-w-lg leading-relaxed">
+        Mitti is a calm, creative studio dedicated to pottery and tactile art experiences for everyone. Slow down, create with your own hands, and feel the grounding, rewarding process of raw clay transformation.
+      </p>
+      <div class="pt-2 flex flex-wrap gap-4 items-center">
+        <a href="#workshops" class="btn-primary">Explore Experiences ↓</a>
+        <a href="https://maps.app.goo.gl/CSHZicRRCuukH1Nw6" target="_blank" rel="noopener noreferrer" class="btn-outline">📍 Studio Map</a>
+      </div>
+    </div>
+    <div class="md:col-span-5 fade-up">
+      <div class="aspect-[4/5] bg-[var(--card)] rounded-[28px] overflow-hidden shadow-sm border border-[var(--line)] relative group">
+        <img src="hero-pottery.png" alt="Wet clay spinning on a potter's wheel" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#1C1B1A]/45 via-transparent to-transparent flex flex-col justify-end p-7 text-white">
+          <div class="w-10 h-[1px] bg-white/60 mb-3"></div>
+          <p class="font-display italic text-lg tracking-wide mb-1">"Earth & Hands"</p>
+          <p class="text-[10px] uppercase tracking-[0.2em] text-white/80">The Wheel Experience</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="throw-divider max-w-6xl mx-auto"></div>
+
+<!-- ABOUT / FOUNDER -->
+<section id="about" class="bg-[var(--paper-deep)]/60 py-20 md:py-24">
+  <div class="max-w-6xl mx-auto px-5 md:px-6">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-center">
+      <div class="md:col-span-5 order-2 md:order-1 fade-up">
+        <div class="aspect-[3/4] max-w-sm mx-auto bg-white rounded-[24px] overflow-hidden shadow-sm border border-[var(--line)] relative group">
+          <img src="Priya_MittiFounder.jpg" alt="Priya — Founder of Mitti Studio" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+        </div>
+      </div>
+      <div class="md:col-span-7 order-1 md:order-2 space-y-5 text-center md:text-left fade-up">
+        <span class="eyebrow justify-center md:justify-start">Studio Leadership</span>
+        <h2 class="text-3xl md:text-4xl font-display font-light tracking-tight text-[var(--ink)]">Guided by Priya</h2>
+        <p class="text-sm md:text-base text-[var(--ink-soft)] leading-relaxed max-w-xl mx-auto md:mx-0">
+          Every throw, trim, and fire at Mitti is thoughtfully structured and personally led by <strong class="text-[var(--ink)] font-semibold">Priya</strong>, a professional artisan potter. Dedicated to making the art of clay accessible to everyone, Priya guides students of all age groups and skill levels — from young toddlers discovering their very first sensory forms to adults mastering utility and balance on the wheel.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STUDIO TOUR -->
+<section id="studio-tour" class="max-w-6xl mx-auto px-5 md:px-6 py-20 md:py-28">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-end mb-10 fade-up">
+    <div class="md:col-span-7 space-y-3">
+      <span class="eyebrow">The Sanctuary</span>
+      <h2 class="text-3xl font-display font-light text-[var(--ink)] tracking-tight">Mitti — The Pottery Studio</h2>
+      <p class="text-sm text-[var(--ink-soft)] max-w-xl leading-relaxed">A thoughtfully curated space designed for creative immersion. Swipe through our studio corners to view our space.</p>
+    </div>
+    <div class="md:col-span-5 text-left md:text-right">
+      <a href="https://maps.app.goo.gl/CSHZicRRCuukH1Nw6" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em] text-[var(--celadon-dark)] hover:text-[var(--ink)] transition-colors border-b-2 border-[var(--celadon)]/40 pb-1 hover:border-[var(--ink)]">
+        📍 View Studio Map & Directions →
+      </a>
+    </div>
+  </div>
+
+  <div class="relative w-full overflow-hidden">
+    <div class="flex overflow-x-auto gap-5 no-scrollbar pb-4 scroll-smooth w-full snap-x snap-mandatory">
+      <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[var(--card)] rounded-2xl overflow-hidden border border-[var(--line)] shadow-sm relative group"><img src="MittiStudio1.jpeg" alt="Studio view 1" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
+      <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[var(--card)] rounded-2xl overflow-hidden border border-[var(--line)] shadow-sm relative group"><img src="MittiStudio2.jpeg" alt="Studio view 2" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
+      <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[var(--card)] rounded-2xl overflow-hidden border border-[var(--line)] shadow-sm relative group"><img src="MittiStudio3.jpeg" alt="Studio view 3" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
+      <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[var(--card)] rounded-2xl overflow-hidden border border-[var(--line)] shadow-sm relative group"><img src="MittiStudio4.jpeg" alt="Studio view 4" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
+      <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[var(--card)] rounded-2xl overflow-hidden border border-[var(--line)] shadow-sm relative group"><img src="MittiStudio5.jpeg" alt="Studio view 5" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
+      <div class="flex-none w-[85%] md:w-[55%] snap-center"><div class="aspect-[16/10] bg-[var(--card)] rounded-2xl overflow-hidden border border-[var(--line)] shadow-sm relative group"><img src="MittiStudio6.jpeg" alt="Studio view 6" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="throw-divider max-w-6xl mx-auto"></div>
+
+<!-- WORKSHOPS -->
+<section id="workshops" class="max-w-6xl mx-auto px-5 md:px-6 py-20 md:py-24 space-y-14">
+  <div class="flex flex-col md:flex-row justify-between items-baseline gap-3 border-b border-[var(--line)] pb-6 fade-up">
+    <div>
+      <span class="eyebrow mb-2 block w-fit">Curated Journeys</span>
+      <h2 class="text-3xl font-display font-light text-[var(--ink)]">Studio Workshop Experiences</h2>
+    </div>
+    <p class="text-xs text-[var(--ink-soft)] uppercase tracking-widest font-semibold">Intimate Batches • Guided Personally by Priya</p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+    <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div class="space-y-2 card p-5 fade-up">
+        <div class="flex justify-between items-baseline border-b border-[var(--line)] pb-1.5">
+          <h3 class="text-sm font-bold text-[var(--ink)]">One-Time Experience</h3>
+          <span class="text-[9px] text-[var(--celadon-dark)] font-bold uppercase tracking-wider bg-[var(--celadon-tint)] px-2 py-0.5 rounded-full">Ages 3+</span>
+        </div>
+        <p class="text-xs text-[var(--ink-soft)] leading-relaxed">A welcoming single-session introduction to clay. Feel the soothing rhythm of raw earth spinning between your hands and mold your very first ceramic vessel.</p>
+      </div>
+      <div class="space-y-2 card p-5 fade-up">
+        <div class="flex justify-between items-baseline border-b border-[var(--line)] pb-1.5">
+          <h3 class="text-sm font-bold text-[var(--ink)]">Clay Dates for Couples</h3>
+          <span class="text-[9px] text-[var(--ink-soft)] font-semibold tracking-widest uppercase">Private</span>
+        </div>
+        <p class="text-xs text-[var(--ink-soft)] leading-relaxed">An elegant screen-free escape. Share a creative evening, co-create unique custom keepsake mugs, and converse in the peaceful tranquility of our space.</p>
+      </div>
+      <div class="space-y-2 card p-5 fade-up">
+        <div class="flex justify-between items-baseline border-b border-[var(--line)] pb-1.5">
+          <h3 class="text-sm font-bold text-[var(--ink)]">Summer & Holidays</h3>
+          <span class="text-[9px] text-[var(--ink-soft)] font-semibold tracking-widest uppercase">Seasonal</span>
+        </div>
+        <p class="text-xs text-[var(--ink-soft)] leading-relaxed">Immersive multi-day holiday intensives. Intentionally engineered to enrich spatial awareness, long-form patience, and structural fine motor coordination.</p>
+      </div>
+      <div class="space-y-2 card p-5 fade-up">
+        <div class="flex justify-between items-baseline border-b border-[var(--line)] pb-1.5">
+          <h3 class="text-sm font-bold text-[var(--ink)]">Make Your Own Gifts</h3>
+          <span class="text-[9px] text-[var(--celadon-dark)] font-bold uppercase tracking-wider bg-[var(--celadon-tint)] px-2 py-0.5 rounded-full">Craft</span>
+        </div>
+        <p class="text-xs text-[var(--ink-soft)] leading-relaxed">Skip ordinary gift items. Learn to craft personalized, long-lasting custom ceramic keepsakes to commemorate important milestones for the people you love.</p>
+      </div>
+      <div class="space-y-2 card p-5 fade-up">
+        <div class="flex justify-between items-baseline border-b border-[var(--line)] pb-1.5">
+          <h3 class="text-sm font-bold text-[var(--ink)]">Lampshades & Bases</h3>
+          <span class="text-[9px] text-[var(--ink-soft)] font-semibold tracking-widest uppercase">Decor</span>
+        </div>
+        <p class="text-xs text-[var(--ink-soft)] leading-relaxed">A dual craft masterclass. Sculpt a solid, functional ceramic structural lamp base on the wheel, paired with fluid artistic lampshade surface painting.</p>
+      </div>
+      <div class="space-y-2 card p-5 fade-up">
+        <div class="flex justify-between items-baseline border-b border-[var(--line)] pb-1.5">
+          <h3 class="text-sm font-bold text-[var(--ink)]">Bespoke Dining Sets</h3>
+          <span class="text-[9px] text-[var(--ink-soft)] font-semibold tracking-widest uppercase">Utility</span>
+        </div>
+        <p class="text-xs text-[var(--ink-soft)] leading-relaxed">Elevate your homeware. Build a uniform set of bespoke artisan plates, soup bowls, and serving dishes patterned explicitly to match your dining room aesthetics.</p>
+      </div>
+    </div>
+
+    <div class="lg:col-span-5 card p-6 space-y-4 fade-up">
+      <div class="space-y-1">
+        <span class="eyebrow">The Makers Gallery</span>
+        <h4 class="font-display text-lg text-[var(--ink)] font-medium">First-Time Student Ceramic Creations</h4>
+        <p class="text-xs text-[var(--ink-soft)] leading-relaxed">Real pottery pieces created, glazed, and finished by first-time students in our studio — beginners of all ages, experiencing pottery for the very first time.</p>
+      </div>
+
+      <div class="viewport-layer rounded-xl bg-white border border-[var(--line)] p-1 shadow-inner no-scrollbar" id="student-viewport">
+        <div class="marquee-container" id="student-track">
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt1.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt2.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt3.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt4.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt5.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt6.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt7.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt8.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt9.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt10.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt11.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt12.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt13.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt14.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt15.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt16.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt17.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt18.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt19.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt20.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt21.jpeg" class="w-full h-full object-cover"></div></div>
+          <div class="w-[150px] sm:w-[170px] flex-none"><div class="aspect-square bg-[var(--paper)] rounded-xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiStudentArt22.jpeg" class="w-full h-full object-cover"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-[var(--ink)] rounded-[28px] p-8 md:p-12 text-center space-y-4 shadow-md fade-up">
+    <span class="eyebrow justify-center text-[#D9B98A]">Give a Meaningful Gift</span>
+    <h4 class="text-2xl font-display text-white font-light">Gift Your Loved Ones a Unique Experience of Pottery</h4>
+    <p class="text-xs md:text-sm text-[#B9B4A9] max-w-xl mx-auto leading-relaxed">
+      Move away from conventional physical presents. Reach out to us directly on WhatsApp to arrange a custom creative session for someone special under Priya's expert guidance.
+    </p>
+    <div class="pt-2">
+      <a href="https://wa.me/918277292337?text=Hi%20Priya%2c%20I%20would%20love%20to%20gift%20a%20unique%20pottery%20experience%20to%20someone%20special.%20How%20can%20I%20arrange%20this%20session%3F" target="_blank" rel="noopener noreferrer" class="inline-block bg-[var(--ember)] hover:bg-[#984c29] text-white text-[11px] uppercase tracking-widest font-bold px-6 py-3.5 rounded-full transition-colors">
+        Gift a Pottery Experience →
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="throw-divider max-w-6xl mx-auto"></div>
+
+<!-- COURSES -->
+<section id="courses" class="bg-[var(--paper-deep)]/60 py-20 md:py-24">
+  <div class="max-w-6xl mx-auto px-5 md:px-6 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+    <div class="lg:col-span-4 space-y-4 fade-up">
+      <span class="eyebrow">Structured Learning</span>
+      <h2 class="text-3xl font-display font-light text-[var(--ink)]">Beginner Pottery Course</h2>
+      <p class="text-sm text-[var(--ink-soft)] leading-relaxed">Design patterns created for absolute beginners who want to explore and conquer the fundamentals of pottery through both handbuilding and wheel throwing techniques.</p>
+      <div class="card p-5">
+        <p class="text-xs tracking-wider uppercase font-bold text-[var(--ink)] mb-1">Course Structure</p>
+        <p class="text-sm font-bold text-[var(--celadon-dark)]">⏱️ 10 Sessions • 2 Hours Per Session</p>
+      </div>
+    </div>
+    <div class="lg:col-span-8 card p-7 md:p-10 space-y-8 fade-up">
+      <div>
+        <h4 class="font-display text-lg text-[var(--ink)] mb-4 border-b border-[var(--line)] pb-2">What You Will Learn</h4>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs md:text-sm text-[var(--ink-soft)]">
+          <li class="flex gap-2"><span class="text-[var(--celadon-dark)] font-bold">✦</span> Basic handbuilding foundations</li>
+          <li class="flex gap-2"><span class="text-[var(--celadon-dark)] font-bold">✦</span> Clay preparation and wheel centering</li>
+          <li class="flex gap-2"><span class="text-[var(--celadon-dark)] font-bold">✦</span> Opening clay and pulling uniform walls</li>
+          <li class="flex gap-2"><span class="text-[var(--celadon-dark)] font-bold">✦</span> Forming cups, bowls, plates, and small pots</li>
+          <li class="flex gap-2"><span class="text-[var(--celadon-dark)] font-bold">✦</span> Trimming, turning, and refining foot rings</li>
+          <li class="flex gap-2"><span class="text-[var(--celadon-dark)] font-bold">✦</span> Introduction to studio glazing techniques</li>
+          <li class="sm:col-span-2 flex gap-2"><span class="text-[var(--celadon-dark)] font-bold">✦</span> Firing cycle steps: tracking greenware to finished ceramic pieces</li>
+        </ul>
+      </div>
+      <div class="bg-[var(--paper)] p-6 rounded-2xl border border-[var(--line)] text-sm text-[var(--ink-soft)] leading-relaxed">
+        All premium raw clays, specialized tools, and aprons are completely provided. Your enrollment covers the complete firing and processing cycles for underglazes and glazes for <strong class="text-[var(--ember)] font-semibold">up to 5 selected pieces</strong>.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KIDS -->
+<section id="kids" class="bg-[var(--paper-deep)]/60 py-20 md:py-24 border-t border-[var(--line)]">
+  <div class="max-w-6xl mx-auto px-5 md:px-6">
+    <div class="text-center max-w-xl mx-auto space-y-3 mb-14 fade-up">
+      <span class="eyebrow justify-center">Tactile Growth</span>
+      <h2 class="text-3xl font-display font-light text-[var(--ink)]">Kids' Art Corner & Events</h2>
+      <p class="text-xs text-[var(--ink-soft)] leading-relaxed">Nurturing micro-motor skills, coordination confidence, and immersive creative play through structured art exploration.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="card p-8 space-y-3 fade-up">
+        <span class="text-xs uppercase font-bold tracking-wider text-[var(--celadon-dark)]">Social Play</span>
+        <h4 class="font-display text-lg text-[var(--ink)]">Kids' Playdates</h4>
+        <p class="text-xs text-[var(--ink-soft)] leading-relaxed">Delightful, social interactive crafting sessions designed specifically for children's get-togethers and interactive groupings.</p>
+      </div>
+      <div class="card p-8 space-y-3 fade-up">
+        <span class="text-xs uppercase font-bold tracking-wider text-[var(--celadon-dark)]">Fine Focus</span>
+        <h4 class="font-display text-lg text-[var(--ink)]">Children's Events</h4>
+        <p class="text-xs text-[var(--ink-soft)] leading-relaxed">Interactive children's milestones centered around real clay assignments, keeping little hands productively molding.</p>
+      </div>
+      <div class="card p-8 space-y-3 fade-up">
+        <span class="text-xs uppercase font-bold tracking-wider text-[var(--celadon-dark)]">Mediums</span>
+        <h4 class="font-display text-lg text-[var(--ink)]">Hands-On Workshops</h4>
+        <p class="text-xs text-[var(--ink-soft)] leading-relaxed">Immersive step-by-step guidance exploring tactile textures, vibrant watercolor exploration, and custom texturing techniques.</p>
+      </div>
+    </div>
+
+    <div class="mt-10 flex flex-wrap justify-center gap-2 max-w-md mx-auto">
+      <span class="bg-[var(--card)] border border-[var(--line)] px-5 py-2 rounded-full text-xs font-semibold text-[var(--ink-soft)] tracking-wide shadow-sm">🏺 Clay Art</span>
+      <span class="bg-[var(--card)] border border-[var(--line)] px-5 py-2 rounded-full text-xs font-semibold text-[var(--ink-soft)] tracking-wide shadow-sm">🎨 Watercolor Exploration</span>
+    </div>
+  </div>
+</section>
+
+<div class="throw-divider max-w-6xl mx-auto"></div>
+
+<!-- PRODUCTS / CUSTOM ORDERS -->
+<section id="products" class="max-w-6xl mx-auto px-5 md:px-6 py-20 md:py-24">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+
+    <div class="lg:col-span-5 space-y-9 fade-up">
+      <div class="space-y-3">
+        <span class="eyebrow">Handcrafted Collection</span>
+        <h2 class="text-3xl font-display font-light text-[var(--ink)] tracking-tight">Custom Ceramic Creations</h2>
+        <p class="text-sm text-[var(--ink-soft)] leading-relaxed">
+          Explore a selected dynamic showcase of premium custom orders and unique stoneware articles created personally by Priya.
+          <strong class="text-[var(--ember)] block mt-2 font-medium">Have a specific design in mind? We accept tailored custom orders to bring your personal concept to life.</strong>
+        </p>
+      </div>
+
+      <div class="space-y-7 text-xs md:text-sm text-[var(--ink-soft)] leading-relaxed border-t pt-8 border-[var(--line)]">
+        <div class="space-y-2">
+          <h4 class="font-bold text-[var(--ink)] font-display text-base">The Tailored Commission Process</h4>
+          <p>Every custom piece commissioned at Mitti follows an intentional, collaborative design workflow. Priya works with you directly to map out dimensions, utility requirements, and color profiles before clay touches the wheel.</p>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-[var(--ink)] font-display text-base">Bespoke Structural Frameworks</h4>
+          <p>Whether you need a uniform dining set proportioned to your table or a structural porcelain lamp base for a unique space, we accept custom orders of all scopes.</p>
+        </div>
+        <div class="space-y-2">
+          <h4 class="font-bold text-[var(--ink)] font-display text-base">Timeline & Studio Firing Cycles</h4>
+          <p>Because authentic high-end ceramics require unhurried processing, custom orders typically take 4 to 6 weeks from initial layout sign-off to final glaze firing. Quality craft cannot be rushed.</p>
+        </div>
+      </div>
+
+      <div class="pt-2">
+        <a href="https://wa.me/918277292337?text=Hi%20Priya%2c%20I%20was%20browsing%20your%20custom%20ceramic%20creations%20lookbook%20and%20have%20an%20idea%20for%20a%20custom%20order.%20I'd%20love%20to%20share%20my%20design%20idea%20with%20you!" target="_blank" rel="noopener noreferrer" class="btn-primary w-full sm:w-auto">
+          ✨ Discuss a Custom Order
+        </a>
+      </div>
+    </div>
+
+    <div class="lg:col-span-7 lg:sticky lg:top-28 w-full overflow-hidden viewport-layer rounded-[24px] bg-[var(--card)] border border-[var(--line)] p-1 shadow-inner no-scrollbar fade-up" id="product-viewport">
+      <div class="marquee-container" id="product-track">
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct1.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct2.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct3.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct4.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct5.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct6.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct7.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct8.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct9.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct10.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct11.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct12.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct13.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct14.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct15.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct16.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct17.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct18.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct19.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct20.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct21.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct22.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct23.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct24.jpeg" class="w-full h-full object-cover"></div></div>
+        <div class="w-[220px] sm:w-[250px] flex-none"><div class="aspect-[4/5] bg-[var(--paper)] rounded-2xl overflow-hidden border border-[var(--line)] select-none pointer-events-none"><img src="MittiProduct25.jpeg" class="w-full h-full object-cover"></div></div>
+      </div>
+      <div class="absolute bottom-6 right-6 bg-[var(--ink)]/85 text-white text-[9px] uppercase tracking-widest px-3 py-1.5 rounded-full backdrop-blur-sm pointer-events-none font-medium">
+        Swipe Lookbook ↔
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="throw-divider max-w-6xl mx-auto"></div>
+
+<!-- CUSTOM SESSIONS -->
+<section id="custom-sessions" class="max-w-6xl mx-auto px-5 md:px-6 py-20 md:py-24">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-14 fade-up">
+    <div class="lg:col-span-4 space-y-2">
+      <span class="eyebrow">Tailored Gatherings</span>
+      <h3 class="text-3xl font-display font-light text-[var(--ink)]">Custom Events & Private Sessions</h3>
+    </div>
+    <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-sm text-[var(--ink-soft)]">
+      <div class="border-l-2 border-[var(--ember)] pl-4 space-y-1">
+        <h4 class="font-bold text-[var(--ink)]">Outdoor & Farm</h4>
+        <p class="text-xs leading-relaxed">Custom outdoor and farm pottery workshops hosted in open lawns or orchard retreats.</p>
+      </div>
+      <div class="border-l-2 border-[var(--ember)] pl-4 space-y-1">
+        <h4 class="font-bold text-[var(--ink)]">Group Activities</h4>
+        <p class="text-xs leading-relaxed">Family gatherings or group activities with pottery and custom creative exercises.</p>
+      </div>
+      <div class="border-l-2 border-[var(--ember)] pl-4 space-y-1">
+        <h4 class="font-bold text-[var(--ink)]">Pre-Wedding</h4>
+        <p class="text-xs leading-relaxed">Romantic, pottery-themed photoshoots combining natural lighting with studio craft.</p>
+      </div>
+      <div class="border-l-2 border-[var(--ember)] pl-4 space-y-1">
+        <h4 class="font-bold text-[var(--ink)]">Curated Programs</h4>
+        <p class="text-xs leading-relaxed">Bespoke design literacy curricula engineered directly for schools, colleges, and institutions.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="relative w-full fade-up">
+    <div class="flex overflow-x-auto gap-6 no-scrollbar pb-6 scroll-smooth w-full">
+      <div class="flex-none w-[290px] xs:w-[328px] sm:w-[48%] lg:w-[31%] snap-center card p-2 flex justify-center">
+        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DWJlZi9j7wt/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; width: 100%;"></blockquote>
+      </div>
+      <div class="flex-none w-[290px] xs:w-[328px] sm:w-[48%] lg:w-[31%] snap-center card p-2 flex justify-center">
+        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DQEfFLYjI-E/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; width: 100%;"></blockquote>
+      </div>
+      <div class="flex-none w-[290px] xs:w-[328px] sm:w-[48%] lg:w-[31%] snap-center card p-2 flex justify-center">
+        <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/DRwi9yAjySg/?utm_source=ig_embed&utm_campaign=loading" data-instgrm-version="14" style=" background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; width: 100%;"></blockquote>
+      </div>
+    </div>
+    <div class="flex justify-center lg:hidden gap-1.5 mt-2 opacity-40">
+      <span class="w-6 h-[2px] bg-[var(--ember)]"></span>
+      <span class="w-2 h-[2px] bg-[var(--ink-soft)]"></span>
+      <span class="w-2 h-[2px] bg-[var(--ink-soft)]"></span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="max-w-3xl mx-auto px-5 md:px-6 py-20 md:py-24">
+  <div class="text-center space-y-2 mb-10 fade-up">
+    <span class="eyebrow justify-center">Good to Know</span>
+    <h3 class="text-2xl font-display font-light text-[var(--ink)]">Studio Guidelines & FAQ</h3>
+  </div>
+  <div class="space-y-4 text-sm text-[var(--ink-soft)] fade-up">
+    <details class="card p-6 group" open>
+      <summary class="font-bold text-[var(--ink)] cursor-pointer list-none flex justify-between items-center gap-4">
+        When can I collect my finished pottery?
+        <span class="text-[var(--celadon-dark)] shrink-0 transition-transform group-open:rotate-45 text-lg">+</span>
+      </summary>
+      <p class="leading-relaxed mt-3">Handcrafted clay goes through a patient journey — requiring thorough air-drying followed by precise bisque and glaze kiln firings. Your finished earthenware will be ready for collection approximately 3 to 4 weeks after your session.</p>
+    </details>
+    <details class="card p-6 group">
+      <summary class="font-bold text-[var(--ink)] cursor-pointer list-none flex justify-between items-center gap-4">
+        What should I wear to a workshop?
+        <span class="text-[var(--celadon-dark)] shrink-0 transition-transform group-open:rotate-45 text-lg">+</span>
+      </summary>
+      <p class="leading-relaxed mt-3">Don't worry about the mess — clay is completely water-soluble and washes out easily! We highly recommend wearing comfortable, casual clothes that you don't mind getting a little dusty. Studio aprons are provided.</p>
+    </details>
+    <details class="card p-6 group">
+      <summary class="font-bold text-[var(--ink)] cursor-pointer list-none flex justify-between items-center gap-4">
+        What is your booking and cancellation policy?
+        <span class="text-[var(--celadon-dark)] shrink-0 transition-transform group-open:rotate-45 text-lg">+</span>
+      </summary>
+      <p class="leading-relaxed mt-3">To preserve the intimate environment of our studio, wheel allocations are strictly limited and reserved exclusively for your scheduled time slot. Sessions can be rescheduled up to 24 hours in advance.</p>
+    </details>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-[var(--ink)] text-[#B9B4A9] pt-16 pb-28 border-t-4 border-[var(--ember)]">
+  <div class="max-w-6xl mx-auto px-5 md:px-6 grid grid-cols-1 md:grid-cols-3 gap-10 items-start text-xs">
+    <div class="space-y-4">
+      <h2 class="text-2xl font-display text-white tracking-wide">Mitti Studio</h2>
+      <p class="text-gray-500 leading-relaxed max-w-sm">A premium collective studio platform dedicated to clay instruction, structural design, and mixed art media workshops based in North Bangalore.</p>
+    </div>
+    <div class="space-y-3">
+      <h4 class="text-white uppercase tracking-widest font-bold text-[10px] mb-2">Connect Directly</h4>
+      <p class="flex items-center gap-2">📞 <a href="tel:+918277292337" class="hover:text-white transition-colors font-medium text-gray-300">+91 8277292337</a></p>
+      <p class="flex items-center gap-2">✉️ <a href="mailto:mitti.pottery.studio@gmail.com" class="hover:text-white transition-colors">mitti.pottery.studio@gmail.com</a></p>
+      <p class="flex items-center gap-2">📸 <a href="https://www.instagram.com/brush_and_mud/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">@brush_and_mud</a></p>
+    </div>
+    <div class="space-y-3">
+      <h4 class="text-white uppercase tracking-widest font-bold text-[10px]">Studio Coordinates</h4>
+      <p class="text-gray-500">Pre-booking is mandatory to ensure single-wheel allocation.</p>
+      <a href="https://forms.gle/8tmBSaus2SWtknm78" target="_blank" rel="noopener noreferrer" class="inline-block bg-[var(--ember)] text-white text-[10px] font-bold uppercase px-4 py-2.5 rounded-full shadow-sm hover:bg-[#984c29] transition-colors">Submit Enquiry Form</a>
+    </div>
+  </div>
+  <div class="max-w-6xl mx-auto px-5 md:px-6 pt-12 mt-12 border-t border-white/10 flex flex-col sm:flex-row justify-between text-[11px] text-gray-600">
+    <p>© 2026 Mitti Pottery Studio. Built intentionally.</p>
+    <p class="mt-2 sm:mt-0">All studio workshops conducted by Priya.</p>
+  </div>
+</footer>
+
+<!-- STICKY MOBILE CTA -->
+<div class="fixed bottom-0 left-0 right-0 bg-[var(--paper)]/95 backdrop-blur-md border-t border-[var(--line)] z-50 py-3 px-5 shadow-lg">
+  <div class="max-w-xl mx-auto flex gap-3 items-center justify-between">
+    <p class="hidden sm:block text-[11px] font-bold uppercase tracking-widest text-[var(--ink-soft)]">Ready to mold?</p>
+    <div class="flex gap-3 w-full sm:w-auto">
+      <a href="https://wa.me/918277292337?text=Hi%20Mitti%20Studio!%20I'm%20interested%20in%20booking%20a%20pottery%20session%20or%20workshop.%20Could%20you%20share%20details%20on%20current%20availability%3F" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none btn-whatsapp">💬 WhatsApp Chat</a>
+      <a href="https://forms.gle/8tmBSaus2SWtknm78" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-none btn-primary">📋 Enquiry Form</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // mobile menu
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  function closeMenu(){ menuToggle.classList.remove('open'); mobileMenu.classList.remove('open'); menuToggle.setAttribute('aria-expanded','false'); }
+  menuToggle.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    menuToggle.classList.toggle('open', open);
+    menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.querySelectorAll('#mobile-menu a').forEach(a => a.addEventListener('click', closeMenu));
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.fade-up');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  function setupIndependentInfiniteLoop(trackId, viewportId, isStudent = false) {
+      const track = document.getElementById(trackId);
+      const viewport = document.getElementById(viewportId);
+      if (!track || !viewport) return;
+
+      const images = track.getElementsByTagName('img');
+      Array.from(images).forEach((img, index) => {
+          img.onerror = function() {
+              const seedId = isStudent ? (10 + index) : (35 + index);
+              this.src = `https://picsum.photos/id/${seedId}/500/600`;
+              this.onerror = null;
+          };
+          if (!img.complete || img.naturalWidth === 0) { img.src = img.src; }
+      });
+
+      const elements = Array.from(track.children);
+      elements.forEach(card => { if (card.getAttribute('aria-hidden') === 'true') card.remove(); });
+
+      const freshElements = Array.from(track.children);
+      freshElements.forEach(card => {
+          const clone = card.cloneNode(true);
+          clone.setAttribute('aria-hidden', 'true');
+          track.appendChild(clone);
+      });
+
+      let scrollOffset = 0;
+      let autoScrollActive = true;
+      let isDragging = false;
+      let startX, currentScrollLeft;
+      const scrollSpeed = 0.5;
+
+      function animateLoop() {
+          if (autoScrollActive && !isDragging) {
+              scrollOffset += scrollSpeed;
+              if (scrollOffset >= track.scrollWidth / 2) { scrollOffset = 0; }
+              track.style.transform = `translateX(${-scrollOffset}px)`;
+          }
+          requestAnimationFrame(animateLoop);
+      }
+      requestAnimationFrame(animateLoop);
+
+      viewport.addEventListener('mousedown', (e) => {
+          isDragging = true; autoScrollActive = false; startX = e.pageX;
+          const matrix = new WebKitCSSMatrix(window.getComputedStyle(track).transform);
+          currentScrollLeft = matrix.m41;
+          viewport.classList.add('cursor-grabbing');
+      });
+      viewport.addEventListener('mouseleave', () => { if (!isDragging) return; isDragging = false; autoScrollActive = true; viewport.classList.remove('cursor-grabbing'); });
+      viewport.addEventListener('mouseup', () => { if (!isDragging) return; isDragging = false; autoScrollActive = true; viewport.classList.remove('cursor-grabbing'); });
+      viewport.addEventListener('mousemove', (e) => {
+          if (!isDragging) return;
+          e.preventDefault();
+          const walk = (e.pageX - startX) * 1.5;
+          let newTranslation = currentScrollLeft + walk;
+          if (newTranslation > 0) { newTranslation = -track.scrollWidth / 2; }
+          else if (Math.abs(newTranslation) >= track.scrollWidth / 2) { newTranslation = 0; }
+          scrollOffset = Math.abs(newTranslation);
+          track.style.transform = `translateX(${newTranslation}px)`;
+      });
+
+      viewport.addEventListener('touchstart', (e) => {
+          autoScrollActive = false; isDragging = true; startX = e.touches[0].pageX;
+          const matrix = new WebKitCSSMatrix(window.getComputedStyle(track).transform);
+          currentScrollLeft = matrix.m41;
+      }, { passive: true });
+      viewport.addEventListener('touchend', () => { autoScrollActive = true; isDragging = false; }, { passive: true });
+      viewport.addEventListener('touchmove', (e) => {
+          if (!isDragging) return;
+          const walk = (e.touches[0].pageX - startX) * 1.4;
+          let newTranslation = currentScrollLeft + walk;
+          if (newTranslation > 0) { newTranslation = -track.scrollWidth / 2; }
+          else if (Math.abs(newTranslation) >= track.scrollWidth / 2) { newTranslation = 0; }
+          scrollOffset = Math.abs(newTranslation);
+          track.style.transform = `translateX(${newTranslation}px)`;
+      }, { passive: true });
+  }
+
+  setupIndependentInfiniteLoop('product-track', 'product-viewport', false);
+  setupIndependentInfiniteLoop('student-track', 'student-viewport', true);
+</script>
+
+<script async src="https://www.instagram.com/embed.js"></script>
 
 </body>
 </html>
